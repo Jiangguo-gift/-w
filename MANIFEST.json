@@ -1,6 +1,6 @@
 {
   "package": "creator-ecosystem-console-脱敏演示版-20261128",
-  "built_at": "2026-11-28 16:04:11",
+  "built_at": "2026-11-28 17:06:55",
   "file_count": 167,
   "uncompressed_bytes": 8383131,
   "size_limit_bytes": 26214400,
@@ -838,8 +838,8 @@
     }
   ],
   "zip_bytes": 4239507,
-  "tar_gz_bytes": 4145625,
-  "zip_sha256": "60b110d869657106b2afb6cf9d6e6c7071456679640174a483454597e8aacb1d",
-  "tar_gz_sha256": "ef502b128c18fedcaf463f00651b655a09d2de50f417286ed0c41f7ec73d1ae5",
+  "tar_gz_bytes": 4145626,
+  "zip_sha256": "d047882a5e3b27f59bf31ca9c267aa437788f90ed8b14c9b33c0928589901831",
+  "tar_gz_sha256": "f66dc826d536ee2ee347ef93be9c94453c8e3571dfac92b1478f3e2f192a49be",
   "within_25mb": true
 }

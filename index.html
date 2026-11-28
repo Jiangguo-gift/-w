@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>达人生态 OS · 认知操作系统 v10</title>
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="edit.css">
+<link rel="stylesheet" href="deck.css">
+<link rel="stylesheet" href="candy.css">
+<link rel="stylesheet" href="tools.css">
+<link rel="stylesheet" href="layer.css">
+<link rel="stylesheet" href="biz.css?v=20261009prm">
+<link rel="stylesheet" href="mind.css">
+<link rel="stylesheet" href="mindops.css?v=20261010lrn1737">
+<link rel="stylesheet" href="os.css">
+<link rel="stylesheet" href="plain.css?v=20261010industryradar">
+<link rel="stylesheet" href="review.css?v=20261008full3">
+<link rel="stylesheet" href="mod.css">
+<link rel="stylesheet" href="modfresh.css?v=20261008daily">
+<link rel="stylesheet" href="hub.css">
+<link rel="stylesheet" href="play.css">
+<link rel="stylesheet" href="ui.css?v=20261008chart">
+<link rel="stylesheet" href="aurora.css">
+<link rel="stylesheet" href="shell.css">
+<link rel="stylesheet" href="sub.css">
+<link rel="stylesheet" href="focus.css">
+<link rel="stylesheet" href="grp.css">
+<link rel="stylesheet" href="v19.css">
+<link rel="stylesheet" href="v20.css">
+<link rel="stylesheet" href="v21.css">
+<link rel="stylesheet" href="v22.css?v=20261008daily">
+<link rel="stylesheet" href="v23.css?v=20261010mindmap">
+<link rel="stylesheet" href="v24.css">
+<link rel="stylesheet" href="v25.css">
+<link rel="stylesheet" href="v26.css">
+<link rel="stylesheet" href="v27.css">
+<link rel="stylesheet" href="v28.css">
+<link rel="stylesheet" href="v29.css">
+<link rel="stylesheet" href="v30.css">
+<link rel="stylesheet" href="v31.css">
+<link rel="stylesheet" href="v6.css">
+<link rel="stylesheet" href="ovhero.css">
+<link rel="stylesheet" href="zonehero.css">
+<link rel="stylesheet" href="moddis.css">
+<link rel="stylesheet" href="sply.css?v=20261011hot">
+<link rel="stylesheet" href="askbox.css?v=20261009prompt2">
+<link rel="stylesheet" href="nebula.css">
+<link rel="stylesheet" href="netflow.css?v=20261113flow">
+<link rel="stylesheet" href="nf2.css?v=20261113nf2b">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230d0d0f'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%2327e021'/%3E%3C/svg%3E">
+</head>
+<body class="candy-light aurora shell">
+
+<!-- ══════════ 顶栏 ══════════ -->
+<div class="topbar">
+  <button id="osFold" title="收起 / 展开侧栏">☰</button>
+  <div class="topbar__where" id="where"><span class="where__g">驾驶舱总览</span><b>全景与可视化看板</b></div>
+
+  <div class="topbar__mid">
+    <div class="kpi"><span class="kpi__n" id="kpiGate">▇▇</span><span class="kpi__k">已裁决</span></div>
+    <span class="kpi__sep"></span>
+    <div class="kpi kpi--edit"><span class="kpi__n" id="kpiEdit">▇▇</span><span class="kpi__k">我的改动</span></div>
+    <span class="kpi__sep"></span>
+    <div class="kpi"><span class="kpi__n" id="kpiGap">▇▇</span><span class="kpi__k">处空缺</span></div>
+    <span class="kpi__sep"></span>
+    <div class="filters" id="filters">
+      <button data-f="all" class="is-on">全部</button>
+      <button data-f="gap">只看空缺</button>
+      <button data-f="decide">只看待决策</button>
+      <button data-f="run">只看在跑</button>
+    </div>
+  </div>
+
+  <div class="topbar__right">
+    <div class="dens" id="dens" title="精简：每块只留结论和关键数字；完整：证据全部摊开">
+      <button data-d="lite" class="is-on">精简</button>
+      <button data-d="full">完整</button>
+    </div>
+    <button class="tbtn" id="palBtn">搜索 <span class="tbtn__kbd">⌘K</span></button>
+    <button class="tbtn" id="editToggle"><span>编辑模式</span><span class="tbtn__kbd">E</span></button>
+    <button class="tbtn" id="queueBtn">队列</button>
+    <button class="tbtn tbtn--solid" id="fbBtn">我的反馈 <b id="fbN"></b></button>
+    <button class="tbtn" id="patchBtn">补丁</button>
+  </div>
+</div>
+
+<!-- 筛选提示条 -->
+<div class="filterbar">
+  <b id="filterLabel"></b>
+  <button id="filterExit">退出筛选</button>
+</div>
+
+<!-- ══════════ 索引栏 ══════════ -->
+<nav class="rail" id="rail">
+  <div class="osbrand">
+    <div class="osbrand__av">OS</div>
+    <div>
+      <div class="osbrand__t">达人生态 OS</div>
+      <div class="osbrand__s">认知操作系统 · v10</div>
+    </div>
+  </div>
+  <div class="osnav" id="osnav"></div>
+  <div class="osme__hint" id="osHint">业绩数字只在「业务工作区」</div>
+  <div class="osme">
+    <div class="osme__av">YL</div>
+    <div>
+      <div class="osme__n">本人</div>
+      <div class="osme__d">MCN 及达人 C 组 · 上海</div>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════ 主体 ══════════ -->
+<main class="stage">
+
+  <!-- ══════════ 一句话 · 让 Aime 帮忙（2026-09-28 HO 指令）══════════
+       驾驶舱全景头版：日常零散提问 / 调用 / 找资料入口
+       事件挂载由 askbox.js 负责 -->
+  <section class="askbox" id="askbox">
+    <div class="askbox__head">
+      <div class="askbox__title">一句话 · <b>让 Aime 帮忙</b></div>
+      <div class="askbox__sub">先把一句话优化成业务指令，再结合工作台全盘路由给 Aime · 提交后自动出「受理卡 + 处理进度」</div>
+      <button class="askbox__qbtn" id="askboxQBtn" title="查看处理队列 · 本地保存 · 可回填/撤回/落台账">
+        <span>🗂 处理队列</span><em class="askbox__qbadge" id="askboxQBadge"></em>
+      </button>
+    </div>
+    <div class="askbox__wrap">
+      <textarea class="askbox__input" id="askboxIn" rows="2"
+        placeholder="比如：拉一下机构G今天的业绩｜写个明天见机构F的开场话术｜查达人D最近的合作明细｜复盘上周和机构H的会议…（回车提交 · Shift+回车换行）"></textarea>
+      <div class="askbox__toolbar">
+        <button class="askbox__tool askbox__tool--opt is-on" data-tool="opt" title="调用 prompt-optimizer：保留业务对象与变量，把一句话改成可执行、可验收的完整指令"><span>✨</span> 提示词优化</button>
+        <button class="askbox__tool" data-tool="deep" title="用 deep-research / prm-cli 做多角度调研"><span>🔎</span> 深度调研</button>
+        <button class="askbox__tool" data-tool="ref"  title="把当前工作台数据 / 打开的模块一起给 Aime"><span>📎</span> 引用工作台</button>
+        <button class="askbox__tool" data-tool="save" title="提交后 Aime 自动落回 Obsidian 记忆库"><span>💾</span> 落进 Obsidian</button>
+        <div class="askbox__spacer"></div>
+        <button class="askbox__mic" id="askboxMic" title="语音（先调起系统输入法麦克风）">🎤</button>
+        <button class="askbox__go" id="askboxGo" title="提交给 Aime（回车）"><span>提交给 Aime</span><span>➤</span></button>
+      </div>
+    </div>
+    <div class="askbox__chips" id="askboxChips">
+      <button class="askbox__chip" data-chip="拉一下 {机构名} 的季度业绩，含分行业分月拆解">🏛 拉机构业绩</button>
+      <button class="askbox__chip" data-chip="查 {达人昵称} 最近 ▇▇ 天的合作和内容表现">👤 查达人</button>
+      <button class="askbox__chip" data-chip="帮我写和 {机构名} 明天拜访的开场话术 + ▇▇个必问问题">💬 写话术</button>
+      <button class="askbox__chip" data-chip="按四件套（客户在做什么 · 我们能不能接 · 卡点在哪 · 下一步）复盘 {会议 / 项目}">🧭 四件套复盘</button>
+      <button class="askbox__chip" data-chip="按四大专项（明星 · 短剧 · 本地 · AI）拆 {机构 / 达人} 的差异化机会">🎯 拆专项</button>
+      <button class="askbox__chip" data-chip="打开 IDA 日报动态业绩看板并读今天数据">📊 今日实时</button>
+      <button class="askbox__chip" data-chip="从 Obsidian 里翻一下 {关键词} 相关的历史沉淀和结论">📚 翻 Obsidian</button>
+      <button class="askbox__chip askbox__chip--new" data-chip="用 sqless-data-analysis 直连业务表，帮我跑一下 {达人A近 ▇▇单的客户分布}：客户名 / 消耗 / 行业 / 是否首投；先给口径和数据截止日，再给明细表和一张简图">🔢 SQL 取明细 · sqless</button>
+      <button class="askbox__chip askbox__chip--new" data-chip="用 solution-deck-builder 把 {方案 / 客户名} 做成 ▇▇ 可翻页演示 + 配套飞书文档：火山蓝白底、目录页先给我看、动效克制、每页留一句 sales talk track">📽 客户级提案 · deck-builder</button>
+      <button class="askbox__chip askbox__chip--new" data-chip="导航栏 ⌘K 搜索有个问题要反馈：搜『{我刚搜的词}』没搜到 / 搜到的不对，实际我要找的是 {}，请补索引 / 加别名 / 更新口径词典，落一条到 _系统/反馈处理台账.md">🔎 搜索反馈</button>
+      <button class="askbox__chip askbox__chip--new" data-chip="结合工作台全盘，对 {机构 / 达人 / 客户 / 专项} 做综合诊断：调用现有数据、策略、规则、历史记忆与外部大盘，先给结论，再给证据、动作、负责人、截止时间和验证标准">✨ 全盘业务分析</button>
+      <button class="askbox__chip" data-chip="安装 / 调用技能：">🧩 调技能</button>
+    </div>
+
+    <!-- 受理卡：提交后 askbox.js 会往这里注入受理编号、状态、路由建议、操作按钮 -->
+    <div class="askbox__recept" id="askboxRecept" hidden></div>
+
+    <!-- 处理队列抽屉：点右上角 🗂 处理队列 开合 -->
+    <div class="askbox__q" id="askboxQueue" hidden>
+      <div class="askbox__q_hd_row">
+        <b>🗂 处理队列</b>
+        <span class="askbox__q_hint">最近 ▇▇条 · 本地存储 · 可撤回 / 补充 / 落台账</span>
+        <button class="askbox__q_close" id="askboxQClose">×</button>
+      </div>
+      <div class="askbox__q_body"></div>
+    </div>
+    <div class="askbox__hist" id="askboxHistWrap" hidden>
+      <div class="askbox__hist_hd">
+        <span>最近 ▇▇次问过</span>
+        <button class="askbox__hist_clr" id="askboxHistClr">清空</button>
+      </div>
+      <div class="askbox__hist_list" id="askboxHistList"></div>
+    </div>
+  </section>
+
+  <header class="hero" id="hero"></header>
+
+  <div id="sections"></div>
+
+  <footer class="pagefoot">
+    <div class="pagefoot__grid">
+      <div>
+        <div class="pagefoot__k">数据可信度</div>
+        <p>页面上每个数字都标了来源和数据截止日（<span class="mono" id="footStamp"></span>）。凡标 <em class="tag tag--infer">推断</em> 的是我推出来的、还没验证，<strong>不要拿去对外说</strong>。</p>
+      </div>
+      <div>
+        <div class="pagefoot__k">你提的东西去哪了</div>
+        <p>页面上任何一个「提交给 Aime」，我这边直接收到，不用你导出补丁。<strong>提完的东西我会落进 Obsidian 仓库</strong>，下次开工先读它。</p>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<!-- ══════════ 命令面板 ══════════ -->
+<div class="pal" id="pal">
+  <div class="pal__box">
+    <input class="pal__in" id="palIn" placeholder="搜章节 / 模块 / 闸门编号 / 高阶指令…　例：Q-020、入料、拜访、反刍" autocomplete="off">
+    <div class="pal__list" id="palList"></div>
+    <div class="pal__empty" id="palEmpty" hidden>
+      <div class="pal__empty_t">没有匹配项</div>
+      <div class="pal__empty_s">如果你确实想搜到某个东西但页面里没有，直接把这句反馈丢给我</div>
+      <button class="pal__empty_btn" id="palFbBtn">🔎 让 Aime 补进索引 / 别名 / 词典 →</button>
+    </div>
+    <div class="pal__foot">
+      <span>↑↓ 选择</span><span>Enter 跳转</span><span>Esc 关闭</span><span>指令类回车自动复制</span>
+      <span class="pal__foot_fb"><button class="pal__foot_fbbtn" id="palFbLink">搜不到？丢给 Aime 补索引 ↗</button></span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 补丁抽屉 ══════════ -->
+<aside class="drawer" id="drawer">
+  <div class="drawer__h">
+    <div class="drawer__t">修改补丁</div>
+    <button class="drawer__x" id="drawerX" aria-label="关闭">✕</button>
+  </div>
+  <div class="drawer__b">
+    <p class="drawer__empty" id="patchHint"></p>
+    <div style="height:16px"></div>
+    <div class="patch" id="patchText"></div>
+  </div>
+  <div class="drawer__f">
+    <button class="tbtn tbtn--solid" id="patchCopy">复制整段</button>
+    <button class="tbtn" id="patchDl">下载 .md</button>
+    <button class="tbtn" id="patchReset" style="margin-left:auto">全部还原</button>
+  </div>
+</aside>
+
+<!-- ══════════ 行动队列抽屉 ══════════ -->
+<aside class="qdrawer" id="qdrawer">
+  <div class="drawer__h">
+    <div class="drawer__t">行动队列</div>
+    <button class="drawer__x" id="qdrawerX" aria-label="关闭">✕</button>
+  </div>
+  <div class="qdrawer__b">
+    <div class="qdrawer__in">
+      <input id="qIn" placeholder="手动加一条要做的事…" autocomplete="off">
+      <button class="btn btn--solid" id="qAdd">加进队列</button>
+    </div>
+    <div class="qlist" id="qList"></div>
+  </div>
+  <div class="drawer__f">
+    <span class="qdrawer__note">队列会跟着补丁一起发我，我按它跟进</span>
+    <button class="tbtn" id="qClear" style="margin-left:auto">清空</button>
+  </div>
+</aside>
+
+<!-- ══════════ Tweaks ══════════ -->
+<div class="tweaks" id="tweaks">
+  <button class="tweaks__toggle" id="tweaksToggle" aria-label="Tweaks">
+    <span class="tweaks__dot"></span><span class="tweaks__dot"></span><span class="tweaks__dot"></span>
+  </button>
+  <div class="tweaks__panel" id="tweaksPanel">
+    <div class="tweaks__title">Tweaks</div>
+
+    <div class="tweaks__row">
+      <label>版式 <span class="tweaks__hint">四栏工作台 / 单栏长页</span></label>
+      <div class="seg" data-tweak="layout">
+        <button data-v="shell" class="is-on">四栏工作台</button><button data-v="page">单栏长页</button>
+      </div>
+    </div>
+
+    <div class="tweaks__row">
+      <label>画风 <span class="tweaks__hint">极光 / 糖果昼 / 糖果夜</span></label>
+      <div class="seg" data-tweak="theme">
+        <button data-v="aurora" class="is-on">极光</button><button data-v="light">糖果昼</button><button data-v="dark">糖果夜</button>
+      </div>
+    </div>
+
+    <div class="tweaks__row">
+      <label>信息密度</label>
+      <div class="seg" data-tweak="density">
+        <button data-v="tight">紧凑</button><button data-v="normal" class="is-on">标准</button>
+      </div>
+    </div>
+
+    <div class="tweaks__row tweaks__row--hero">
+      <label>空缺高亮 <span class="tweaks__hint">只亮没做的</span></label>
+      <div class="seg" data-tweak="gap">
+        <button data-v="off" class="is-on">关</button><button data-v="on">开</button>
+      </div>
+    </div>
+
+    <div class="tweaks__row">
+      <label>动效</label>
+      <div class="seg" data-tweak="motion">
+        <button data-v="on" class="is-on">开</button><button data-v="off">关</button>
+      </div>
+    </div>
+
+    <div class="tweaks__foot">
+      <button class="btn btn--ghost" id="expandAll">展开全部折叠块</button>
+    </div>
+  </div>
+</div>
+
+<div class="editnote">
+  编辑模式开着 —— 改动只存在本机浏览器，<b>要落到仓库得点顶栏「补丁」发我</b>　·　按 Esc 退出
+</div>
+
+<!-- ══════════ 底部指令栏 ══════════ -->
+<div class="cmdbar">
+  <div class="cmdbar__box">
+    <textarea class="cmdbar__in" id="cmdIn" rows="1"
+      placeholder="随手记一句：看到什么现象 / 想到什么玩法 / 谁可能有需求…（回车就提交给我）"></textarea>
+    <div class="cmdbar__f">
+      <button class="cchip is-on" data-cmode="idea">❋ 灵感</button>
+      <button class="cchip" data-cmode="todo">☑ 待办</button>
+      <span class="cmdbar__note">回车提交，我这边直接收到</span>
+      <button class="cmdbar__go" id="cmdGo" title="记下">➤</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="echarts.min.js"></script>
+<script src="data/rules.data.js"></script>
+<script src="cnt.js"></script>
+<script src="data.js"></script>
+<script src="data2.js?v=20261008copy"></script>
+<script src="mind.js?v=20261010premise1739"></script>
+<script src="mindops.js?v=20261010lrn1737"></script>
+<script src="tools.js?v=20261008copy"></script>
+<script src="biz.js?v=20261102-rev95"></script>
+<script src="charts.js"></script>
+<script src="os.js?v=20261004a"></script>
+<script src="fb.js?v=20261008search"></script>
+<script src="goal.js?v=20261102-rev95"></script>
+<script src="opp.js?v=20261030memdaily"></script>
+<script src="review.js?v=20261102-rev95"></script>
+<script src="grill.js?v=20261008copy"></script>
+<script src="plain.js?v=20261102-rev95"></script>
+<script src="hubdata.js"></script>
+<script src="hub.js"></script>
+<script src="play.js"></script>
+<script src="hq.js?v=20261102-rev95"></script>
+<script src="push.js?v=20261011todo1733"></script>
+<script src="edge.js"></script>
+<script src="sply.data.js?v=20261102-rev95"></script>
+<script src="sply.data2.js?v=20261014auto-strategy"></script>
+<script src="sply.hot.js?v=20261011hot"></script>
+<script src="sply.js?v=20261011hot"></script>
+<script src="selfeval.js?v=20261012q3template"></script>
+<script src="sys.js?v=20261012q3template"></script>
+<script src="nf2.data.js?v=20261113nf2b"></script>
+<script src="nf2.js?v=20261113nf2b"></script>
+<script src="net.js?v=20261113nf2b"></script>
+<script src="own.js"></script>
+<script src="coop.js"></script>
+<script src="wk.js?v=20261102-rev95"></script>
+<script src="rul.js"></script>
+<script src="daily.js?v=20261010daily"></script>
+<script src="cat.js?v=20261111-mem"></script>
+<script src="nebula.js"></script>
+<script src="spk.js?v=20261010mindmap"></script>
+<script src="pat.js?v=20261008daily"></script>
+<script src="rec.js"></script>
+<script src="frsh.js?v=20261010daily2"></script>
+<script src="modfresh.js?v=20261008daily"></script>
+<script src="mod.js?v=20261111-mem"></script>
+<script src="moddis.js"></script>
+<script src="v5.js?v=20261111-mem"></script>
+<script src="v6.js?v=20261010lrn1737"></script>
+<script src="daily-refresh-20261011.js?v=20261011daily2022"></script>
+<script src="daily-refresh-20261112.js?v=20261112daily1038"></script>
+<script src="ui.js?v=20261102-rev95"></script>
+<script src="render.js?v=20261014jiushu-q4"></script>
+<script src="grp.js?v=20261113flow"></script>
+<script src="shell.js"></script>
+<script src="sub.js"></script>
+<script src="dash.js"></script>
+<script src="ovhero.js"></script>
+<script src="zonehero.js"></script>
+<script src="askbox.js?v=20261009pinned"></script>
+</body>
+</html>
