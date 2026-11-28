@@ -1,0 +1,182 @@
+/* ═══════════════════════════════════════════════════════════════════
+   focus.css —— 「结论优先」可视化层（v1）
+   载入顺序：… → ui.css → aurora.css → shell.css → sub.css → focus.css（最后）
+   ───────────────────────────────────────────────────────────────────
+   2026-09-13 本人指令：「优化这个工作台页面的可视化展示能力，
+   给每个框架的子模块设置左侧导航栏，让每个模块的动作结论更清晰。」
+   本层只做三件事：
+     ① 结论条 .mxsum —— 每页最上面一条：状态 + 一句话结论 + 现在就做这一件
+     ② 动作有优先级 —— 「你可以做什么」第一条挂「先做这件」，其余编号
+     ③ 重要信息可视化 —— KPI 卡六色轮转 + 顶部色条，要点列表分级
+   ⛔ 不改任何数字、口径、来源、四块顺序；配色全部走既有语义色令牌，
+      所以极光 / 糖果昼 / 糖果夜三档都能用。
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── ① 结论条 ─────────────────────────────────────── */
+.sec > .mxsum { max-width: 1180px; margin-left: auto; margin-right: auto; }
+.mxsum {
+  --fc: var(--brand, #5C63E6);
+  --fcw: var(--brand-w, rgba(92, 99, 230, .08));
+  position: relative;
+  display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(280px, 1fr);
+  gap: 0; margin: 0 0 var(--u5, 20px);
+  border: 1px solid var(--rule); border-radius: 20px;
+  background: var(--card, #fff);
+  box-shadow: var(--sh-2, 0 2px 8px rgba(20, 24, 50, .05));
+  overflow: hidden;
+}
+/* 左边一条竖色带：状态一眼可辨，不靠读字 */
+.mxsum::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+  background: var(--fc);
+  background: linear-gradient(180deg, var(--fc), color-mix(in srgb, var(--fc) 30%, transparent));
+}
+.mxsum--go    { --fc: var(--run, #2E5D4F);    --fcw: var(--run-w, rgba(46, 93, 79, .08)); }
+.mxsum--watch { --fc: var(--open, #9A6511);   --fcw: var(--open-w, rgba(154, 101, 17, .09)); }
+.mxsum--wait  { --fc: var(--signal, #B5391F); --fcw: var(--signal-w, rgba(181, 57, 31, .08)); }
+
+.mxsum__main { padding: var(--u5, 20px) var(--u6, 24px) var(--u5, 20px) calc(var(--u6, 24px) + 4px); }
+.mxsum__top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+.mxsum__st {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 22px; padding: 0 10px; border-radius: 999px;
+  background: var(--fc); color: #fff;
+  font: 800 11px/1 var(--font-body); letter-spacing: .02em;
+}
+.mxsum__st::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #fff; opacity: .9; }
+.mxsum--wait .mxsum__st::before { animation: fcPulse 1.6s ease-in-out infinite; }
+@keyframes fcPulse { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
+.mxsum__k {
+  font: 800 10.5px/1 var(--font-body); letter-spacing: .16em;
+  color: var(--ink-4); text-transform: uppercase;
+}
+.mxsum__now {
+  margin: 0; font-size: 15.5px; line-height: 1.66; color: var(--ink);
+  font-weight: 500; letter-spacing: -.008em;
+}
+.mxsum__now b { font-weight: 800; color: var(--ink); }
+.mxsum__dep {
+  margin-top: 12px; padding: 9px 12px; border-radius: 11px;
+  background: var(--fcw); border: 1px solid var(--rule);
+  border-color: color-mix(in srgb, var(--fc) 18%, transparent);
+  font-size: 12.5px; line-height: 1.62; color: var(--ink-2);
+}
+.mxsum__dep em {
+  font-style: normal; font-weight: 800; color: var(--fc);
+  margin-right: 7px; font-size: 11px; letter-spacing: .04em;
+}
+
+/* 右半：现在就做这一件 */
+.mxsum__act {
+  padding: var(--u5, 20px) var(--u6, 24px);
+  border-left: 1px solid var(--rule);
+  background: linear-gradient(180deg, var(--fcw), transparent 78%);
+  display: flex; flex-direction: column; gap: 9px;
+}
+.mxsum__ak {
+  font: 800 10.5px/1 var(--font-body); letter-spacing: .14em;
+  color: var(--fc); text-transform: uppercase;
+}
+.mxsum__go {
+  display: flex; align-items: center; gap: 10px; text-align: left; cursor: pointer;
+  padding: 11px 14px; border-radius: 13px; border: 0;
+  background: var(--fc);
+  background: linear-gradient(135deg, var(--fc), color-mix(in srgb, var(--fc) 74%, #fff));
+  color: #fff; font: 800 13.5px/1.45 var(--font-body); letter-spacing: -.005em;
+  box-shadow: 0 8px 20px -12px rgba(20, 24, 50, .34);
+  transition: transform .16s ease, box-shadow .16s ease, filter .16s ease;
+}
+.mxsum__go i { font-style: normal; margin-left: auto; font-size: 15px; opacity: .85; }
+.mxsum__go:hover { transform: translateY(-1px); filter: saturate(1.08); box-shadow: 0 12px 26px -12px rgba(20, 24, 50, .4); }
+.mxsum__go:active { transform: none; }
+.mxsum__why { font-size: 12px; line-height: 1.62; color: var(--ink-3); }
+.mxsum__cnt {
+  margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--rule);
+  display: flex; gap: 14px; flex-wrap: wrap;
+}
+.mxsum__cnt span {
+  display: inline-flex; align-items: baseline; gap: 5px;
+  font-size: 11px; color: var(--ink-4);
+}
+.mxsum__cnt b {
+  font: 800 13px/1 var(--font-mono); color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 900px) {
+  .mxsum { grid-template-columns: 1fr; }
+  .mxsum__act { border-left: 0; border-top: 1px solid var(--rule); }
+}
+
+/* ── ② 动作优先级 ─────────────────────────────────── */
+.mxb__l--do > li { padding-left: 0; }
+.mxb__l--do > li::before { display: none; }
+.mxb__l--do > li > b { display: inline; }
+.mxb__first, .mxb__ord {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-style: normal; vertical-align: 1px; margin-right: 7px;
+}
+.mxb__first {
+  height: 18px; padding: 0 8px; border-radius: 999px;
+  background: var(--run, #2E5D4F); color: #fff;
+  font: 800 10px/1 var(--font-body); letter-spacing: .04em;
+}
+.mxb__ord {
+  width: 17px; height: 17px; border-radius: 50%;
+  background: var(--chip, #eef0f9); color: var(--ink-3);
+  font: 800 10px/1 var(--font-mono);
+}
+.mxb__l--do > li.is-first {
+  padding: 11px 13px; margin: -2px 0 2px; border-radius: 13px;
+  background: var(--run-w, rgba(46, 93, 79, .07));
+  border: 1px solid var(--rule);
+  border-color: color-mix(in srgb, var(--run, #2E5D4F) 20%, transparent);
+}
+.mxb__l--do > li.is-first > b { font-weight: 800; }
+
+/* ── ③ 重要信息：KPI 卡六色轮转 ────────────────────── */
+.mxk__n { position: relative; overflow: hidden; }
+.mxk__n::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 0; height: 3px;
+  background: var(--kc, var(--ink-4));
+}
+.mxk__n[data-c="▇▇"] { --kc: #5C63E6; }
+.mxk__n[data-c="▇▇"] { --kc: #17795C; }
+.mxk__n[data-c="▇▇"] { --kc: #8A5A08; }
+.mxk__n[data-c="▇▇"] { --kc: #A83370; }
+.mxk__n[data-c="▇▇"] { --kc: #3C43C9; }
+.mxk__n[data-c="▇▇"] { --kc: #6D3FC8; }
+.mxk__n .mxk__v { color: var(--ink); }
+.mxk__n .mxk__v i { color: var(--kc); opacity: .85; }
+.mxk__n {
+  transition: transform .16s ease, box-shadow .16s ease;
+  background: var(--card, #fff);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--kc) 6%, var(--card, #fff)), var(--card, #fff) 62%);
+}
+.mxk__n:hover { transform: translateY(-2px); box-shadow: var(--sh-2, 0 8px 20px -14px rgba(20, 24, 50, .3)); }
+
+/* 要点列表：首字标记（✅ ⚠️ ⭐ ⏳ ①…）已经在文案里，这里只加左侧竖线分级 */
+.mxk__l > li { border-left: 2px solid var(--rule); padding-left: 12px; }
+.mxk__l > li:hover { border-left-color: var(--brand, #5C63E6); }
+
+/* ── ④ 进场节奏：结论条先到，四块随后 ──────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .sec.is-view > .mxsum { animation: fcRise .42s cubic-bezier(.16, 1, .3, 1) both; }
+  .sec.is-view > .mx    { animation: fcRise .42s cubic-bezier(.16, 1, .3, 1) .06s both; }
+  @keyframes fcRise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+}
+body.motion-off .sec.is-view > .mxsum,
+body.motion-off .sec.is-view > .mx { animation: none !important; }
+
+/* ── ⑤ 窄屏 ───────────────────────────────────────── */
+@media (max-width: 640px) {
+  .mxsum__main, .mxsum__act { padding: var(--u4, 16px) var(--u4, 16px); }
+  .mxsum__now { font-size: 14.5px; }
+  .mxsum__go { font-size: 12.5px; padding: 10px 12px; }
+  .mxsum__cnt { gap: 10px; }
+}
+
+/* 打印：结论条要留，动效不要 */
+@media print {
+  .mxsum { break-inside: avoid; box-shadow: none; }
+  .mxsum__go { color: #000; background: none; border: 1px solid #999; }
+}

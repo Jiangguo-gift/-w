@@ -1,0 +1,95 @@
+/* ═══════════════════════════════════════════════════════════
+   grp.css —— 大类分组层（配 grp.js）
+   一个大类 = 一条粗标题 + 一句"看完能回答什么" + 一排块内直达 + 内容区。
+   只用已有令牌（--rule / --card / --ink* / --chip / --brand / --sh-*），
+   不用 color-mix（那个在这套画风里静默失效过一次）。
+   ═══════════════════════════════════════════════════════════ */
+
+.cgrps { display: block; }
+
+.cgrp {
+  margin: 0 0 34px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r3, 22px);
+  background: var(--panel, #fff);
+  box-shadow: var(--glass-sh);
+  overflow: hidden;
+}
+
+/* ── 头：类目名 + 这一类回答什么 ── */
+.cgrp__h {
+  display: flex; align-items: flex-start; gap: 18px; flex-wrap: wrap;
+  padding: 20px 26px 16px;
+  border-bottom: 1px solid var(--rule);
+  background: var(--panel-2);
+}
+.cgrp__l { display: flex; align-items: flex-start; gap: 13px; min-width: 0; flex: 1 1 320px; }
+.cgrp__n {
+  flex: none; font-style: normal;
+  width: 30px; height: 30px; border-radius: 10px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono, ui-monospace, Menlo, monospace);
+  font-size: 12px; font-weight: 800; letter-spacing: -.02em;
+  background: var(--ink); color: var(--paper);
+}
+.cgrp__t {
+  margin: 0; font-size: 21px; line-height: 1.25; letter-spacing: -.02em;
+  font-weight: 800; color: var(--ink);
+}
+.cgrp__q {
+  margin: 5px 0 0; font-size: 12.5px; line-height: 1.55; color: var(--ink-3);
+}
+.cgrp__q::before { content: '本板块覆盖：'; color: var(--ink-4); }
+
+/* 块内直达 */
+.cgrp__in { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.cgrp__a {
+  border: 1px solid var(--rule); background: var(--panel-2);
+  color: var(--ink-2); cursor: pointer;
+  height: 26px; padding: 0 11px; border-radius: 13px;
+  font-size: 12px; font-weight: 700; line-height: 1;
+  transition: background var(--dur, 180ms) var(--ease, ease), color var(--dur, 180ms) var(--ease, ease);
+}
+.cgrp__a:hover { background: var(--ink); color: var(--paper); border-color: transparent; }
+
+/* ── 身：原来的块原样放进来，只去掉外层重复的圆角与阴影 ── */
+.cgrp__b { padding: 22px 26px 26px; display: block; }
+.cgrp__b > * { margin-left: 0; margin-right: 0; }
+.cgrp__b > *:last-child { margin-bottom: 0; }
+
+/* 里面的块已经在一张大卡里了，别再套一层卡 */
+.cgrp__b > .mxk,
+.cgrp__b > .viz,
+.cgrp__b > .bzv,
+.cgrp__b > .rv,
+.cgrp__b > .cext,
+.cgrp__b > .bizs,
+.cgrp__b > .pano,
+.cgrp__b > .block,
+.cgrp__b > .bzsec,
+.cgrp__b > .mxlnk,
+.cgrp__b > .pl,
+.cgrp__b > .hqn, .cgrp__b > .hqd, .cgrp__b > .hqp, .cgrp__b > .hqa,
+.cgrp__b > .pgv, .cgrp__b > .pgp, .cgrp__b > .pgt {
+  box-shadow: none;
+}
+
+/* v19 的四块（驾驶舱聚合 / 主动推进 / 能力拆解）自己带白卡外壳，
+   进了大类卡就得把外壳脱掉，否则是卡里套卡、两层边框两层内边距 */
+.cgrp__b > .hqn, .cgrp__b > .hqd, .cgrp__b > .hqp, .cgrp__b > .hqa,
+.cgrp__b > .pgv, .cgrp__b > .pgp, .cgrp__b > .pgt,
+.cgrp__b > .cext {
+  border: 0; border-radius: 0; padding: 0; margin: 0; background: transparent;
+}
+
+/* 同一类里多块之间给一条淡分隔，视线不会糊成一片 */
+.cgrp__b > * + * {
+  margin-top: 22px; padding-top: 22px; border-top: 1px dashed var(--rule-2, #ddd);
+}
+
+@media (max-width: 720px) {
+  .cgrp__h { padding: 16px 15px 13px; gap: 12px; }
+  .cgrp__b { padding: 16px 13px 18px; }
+  .cgrp__t { font-size: 18px; }
+  .cgrp__n { width: 26px; height: 26px; font-size: 11px; }
+}

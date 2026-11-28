@@ -836,10 +836,5 @@
       "bytes": 15780,
       "sha256": "e7698956e158e007a28e094a0baf7f3f52f73278790680c3fad7ec7c4b12dd83"
     }
-  ],
-  "zip_bytes": 4239507,
-  "tar_gz_bytes": 4145626,
-  "zip_sha256": "d047882a5e3b27f59bf31ca9c267aa437788f90ed8b14c9b33c0928589901831",
-  "tar_gz_sha256": "f66dc826d536ee2ee347ef93be9c94453c8e3571dfac92b1478f3e2f192a49be",
-  "within_25mb": true
+  ]
 }

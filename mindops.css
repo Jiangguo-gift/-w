@@ -1,0 +1,77 @@
+/* 学习认知自运行优化建议 · 只补本模块所需样式 */
+.lops{display:grid;gap:22px}
+.lops .block{margin:0}
+
+.lops-flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.lops-step{position:relative;min-height:210px;padding:15px 15px 14px;background:var(--panel-2);border:1px solid var(--rule);border-radius:14px;display:flex;flex-direction:column;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+.lops-step:hover{transform:translateY(-2px);border-color:var(--rule-2);box-shadow:0 10px 24px rgba(30,27,75,.07)}
+.lops-step__top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:14px;font:650 10.5px/1 var(--font-mono);letter-spacing:.06em;color:var(--ink-3)}
+.lops-step__top em{font:650 10px/1 var(--font-body);font-style:normal;padding:4px 7px;border-radius:6px;background:var(--open-w);color:var(--open)}
+.lops-step[data-st="run"] .lops-step__top em{background:var(--run-w);color:var(--run)}
+.lops-step h4{margin:0 0 8px;font:700 14px/1.4 var(--font-body);color:var(--ink);text-wrap:balance}
+.lops-step p{margin:0 0 14px;font:400 12px/1.65 var(--font-body);color:var(--ink-2);text-wrap:pretty}
+.lops-step button,.lops-rec button{margin-top:auto;align-self:flex-start;border:0;background:transparent;padding:6px 0;color:var(--os-vi);font:650 11.5px/1.3 var(--font-body);cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.lops-step button i,.lops-rec button i{font-style:normal;transition:transform .18s ease}
+.lops-step button:hover i,.lops-rec button:hover i{transform:translateX(3px)}
+.lops-step button:focus-visible,.lops-rec button:focus-visible,.lops-next button:focus-visible{outline:2px solid var(--os-vi);outline-offset:3px;border-radius:5px}
+.lops-step__arrow{position:absolute;right:-10px;top:96px;z-index:2;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:var(--panel);border:1px solid var(--rule);color:var(--ink-4);font:600 10px/1 var(--font-body)}
+
+.lops-queue{display:grid;grid-template-columns:1.1fr .9fr;gap:13px}
+.lops-rec{position:relative;padding:17px 18px 16px;background:var(--panel-2);border:1px solid var(--rule);border-left:3px solid var(--open);border-radius:14px;display:flex;flex-direction:column}
+.lops-rec[data-tone="hot"]{border-left-color:var(--signal);background:linear-gradient(90deg,var(--signal-w),var(--panel-2) 36%)}
+.lops-rec__head{display:grid;grid-template-columns:auto auto 1fr;align-items:center;gap:8px;margin-bottom:9px}
+.lops-rec__head>span{font:750 11px/1 var(--font-mono);color:var(--ink-4)}
+.lops-rec__head>em{font:700 10px/1 var(--font-body);font-style:normal;padding:4px 7px;border-radius:6px;background:var(--open-w);color:var(--open)}
+.lops-rec[data-tone="hot"] .lops-rec__head>em{background:var(--signal-w);color:var(--signal)}
+.lops-rec__head h4{margin:0;font:750 15px/1.35 var(--font-body);color:var(--ink)}
+.lops-rec__q{margin:0 0 11px;font:500 12.5px/1.65 var(--font-body);color:var(--ink-2)}
+.lops-rec dl{margin:0;display:grid;gap:7px}
+.lops-rec dl>div{display:grid;grid-template-columns:48px 1fr;gap:8px;padding-top:7px;border-top:1px dashed var(--rule)}
+.lops-rec dt{font:700 10.5px/1.65 var(--font-body);color:var(--ink-4)}
+.lops-rec dd{margin:0;font:400 11.8px/1.65 var(--font-body);color:var(--ink-2)}
+
+.lops-loop{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border:1px solid var(--rule);border-radius:15px;overflow:hidden;background:var(--panel-2)}
+.lops-loop li{position:relative;display:grid;grid-template-columns:auto 1fr;gap:10px;padding:16px 14px;border-right:1px solid var(--rule)}
+.lops-loop li:last-child{border-right:0}
+.lops-loop li>span{font:750 10.5px/1 var(--font-mono);color:var(--os-vi);padding-top:3px}
+.lops-loop b{display:block;font:700 12.5px/1.4 var(--font-body);color:var(--ink)}
+.lops-loop p{margin:5px 0 0;font:400 11.5px/1.6 var(--font-body);color:var(--ink-3)}
+
+.lops-src{display:grid;gap:0;border-top:1px solid var(--rule)}
+.lops-src>div{display:grid;grid-template-columns:minmax(130px,.65fr) minmax(220px,1.8fr) minmax(150px,.8fr);gap:16px;align-items:center;padding:12px 2px;border-bottom:1px solid var(--rule)}
+.lops-src b{font:650 12.5px/1.4 var(--font-body);color:var(--ink)}
+.lops-src span{font:400 12px/1.55 var(--font-body);color:var(--ink-2)}
+.lops-src time{text-align:right;font:500 10.5px/1.4 var(--font-mono);color:var(--ink-4);font-variant-numeric:tabular-nums}
+
+.lops-bound{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.lops-bound>div{padding:14px 15px;border-radius:12px;border:1px solid var(--rule);background:var(--panel-2);border-top:3px solid var(--run)}
+.lops-bound>div[data-st="part"]{border-top-color:var(--open)}
+.lops-bound>div[data-st="ask"],.lops-bound>div[data-st="stop"]{border-top-color:var(--signal)}
+.lops-bound b{font:700 12.5px/1.35 var(--font-body);color:var(--ink)}
+.lops-bound p{margin:5px 0 0;font:400 11.8px/1.65 var(--font-body);color:var(--ink-2)}
+.lops-next{margin-top:12px;padding:14px 16px;background:var(--os-vi-w);border:1px solid rgba(124,92,255,.2);border-radius:13px;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center}
+.lops-next span{font:700 10px/1 var(--font-body);color:var(--os-vi);letter-spacing:.06em}
+.lops-next b{font:650 12.5px/1.55 var(--font-body);color:var(--ink)}
+.lops-next button{border:0;background:var(--os-vi);color:#fff;border-radius:9px;padding:9px 12px;font:650 11.5px/1 var(--font-body);cursor:pointer;transition:transform .18s ease,filter .18s ease}
+.lops-next button:hover{transform:translateY(-1px);filter:brightness(1.05)}
+.lops-next button:active{transform:translateY(1px)}
+
+@media (max-width:1180px){
+  .lops-flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .lops-step{min-height:185px}
+  .lops-step__arrow{display:none}
+  .lops-loop{grid-template-columns:1fr}
+  .lops-loop li{border-right:0;border-bottom:1px solid var(--rule)}
+  .lops-loop li:last-child{border-bottom:0}
+}
+@media (max-width:760px){
+  .lops-flow,.lops-queue,.lops-bound{grid-template-columns:1fr}
+  .lops-step{min-height:0}
+  .lops-src>div{grid-template-columns:1fr;gap:4px}
+  .lops-src time{text-align:left}
+  .lops-next{grid-template-columns:1fr;align-items:start}
+  .lops-next button{justify-self:start}
+}
+@media (prefers-reduced-motion:reduce){
+  .lops-step,.lops-step button i,.lops-rec button i,.lops-next button{transition:none}
+}

@@ -1,0 +1,265 @@
+
+/* ═══════════════════════════════════════════════════════════
+   v6 · 信息分层
+   上一版全页 ▇▇万字同一层级铺开，等于没有重点。
+   这一层负责把「结论」抬起来、把「证据」压下去。
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 密度开关（顶栏） ───────────────────── */
+.dens{
+  display:inline-flex;align-items:center;gap:2px;
+  padding:3px;border-radius:999px;
+  background:var(--panel-2);border:1px solid var(--rule);
+  margin-right:4px;
+}
+.dens button{
+  appearance:none;border:0;cursor:pointer;
+  font-family:var(--font-mono);font-size:10.5px;letter-spacing:.04em;
+  padding:5px 11px;border-radius:999px;
+  background:transparent;color:var(--ink-3);
+  transition:background .16s ease,color .16s ease;
+}
+.dens button:hover{color:var(--ink)}
+.dens button.is-on{
+  background:var(--ink);color:var(--paper);font-weight:700;
+}
+
+/* ── L1 结论条 ───────────────────────────
+   每个 block 在精简态唯一保证可见的那句话。
+   比正文大一档、行高松一点，让眼睛第一个抓到它。 */
+.lead{
+  margin:0 0 16px;
+  font-size:14.5px;line-height:1.62;color:var(--ink);
+  letter-spacing:.005em;
+  padding-left:14px;
+  border-left:2px solid var(--ink);
+}
+.lead b{font-weight:750}
+.lead--gap{border-left-color:var(--signal)}
+.lead--run{border-left-color:var(--run)}
+.lead--open{border-left-color:var(--open)}
+.lead em{
+  font-style:normal;
+  background:linear-gradient(transparent 62%,var(--signal-soft) 62%);
+  padding:0 1px;
+}
+
+/* ── L2 折叠证据 ─────────────────────── */
+.pk{margin-top:14px}
+.pk__t{
+  appearance:none;cursor:pointer;
+  display:inline-flex;align-items:center;gap:7px;
+  padding:6px 13px 6px 10px;border-radius:999px;
+  background:var(--panel-2);border:1px solid var(--rule);
+  font-family:var(--font-mono);font-size:10.5px;letter-spacing:.03em;
+  color:var(--ink-3);
+  transition:border-color .16s ease,color .16s ease,background .16s ease;
+}
+.pk__t:hover{border-color:var(--ink-4);color:var(--ink);background:var(--panel)}
+.pk__x{
+  font-style:normal;display:inline-block;
+  font-size:9px;line-height:1;
+  transition:transform .2s cubic-bezier(.4,0,.2,1);
+  color:var(--ink-4);
+}
+.pk.is-open .pk__x{transform:rotate(90deg)}
+.pk.is-open .pk__t{color:var(--ink);border-color:var(--ink-4)}
+.pk__n{
+  font-weight:700;color:var(--ink);
+  font-size:10.5px;
+  padding:1px 6px;border-radius:999px;
+  background:var(--rule);
+}
+.pk__b{
+  display:none;
+  margin-top:16px;
+  animation:pkIn .26s cubic-bezier(.4,0,.2,1);
+}
+.pk.is-open > .pk__b{display:block}
+@keyframes pkIn{
+  from{opacity:0;transform:translateY(-6px)}
+  to{opacity:1;transform:none}
+}
+body.motion-off .pk__b{animation:none}
+
+/* ── 强调通胀治理 ───────────────────────
+   上一版满屏粗体 + 红字 + 下划线，三种强调同时用 = 等于没强调。
+   这里把 <b> 的视觉重量降下来：靠字重和极轻的色差区分，不再是纯黑大粗。 */
+.block__note b,.dcard__f b,.lead b{font-weight:700}
+.block__note,.dcard__f{color:var(--ink-3)}
+.block__note b,.dcard__f b{color:var(--ink-2)}
+
+/* ── 图注瘦身 ───────────────────────────
+   图注是给图做注脚的，不该比图还重。 */
+.dcard__f{
+  font-size:12px;line-height:1.6;
+  padding-top:12px;margin-top:auto;
+  border-top:1px solid var(--rule);
+}
+.dcard__f .pk{margin-top:9px}
+.dcard__f .pk__t{padding:4px 10px 4px 8px;font-size:9.5px}
+
+/* 图注里的二级说明：默认藏起来，点开才出现 */
+.fmore{
+  font-size:11.5px;line-height:1.62;color:var(--ink-3);
+  padding:11px 13px;margin-top:2px;
+  border-radius:10px;background:var(--panel-2);
+  border:1px solid var(--rule);
+}
+.fmore b{color:var(--ink-2)}
+
+/* ── 精简态：把次要容器整体压扁 ───────── */
+body:not(.dens-full) .block__note{
+  font-size:12.5px;line-height:1.6;
+  color:var(--ink-4);
+}
+/* 精简态下 lead 之后紧跟的说明段落收起来 —— 结论已经说完了 */
+body:not(.dens-full) .note-2nd{display:none}
+
+/* ── 紧凑台账（▇▇条裁决）─────────────────
+   上一版：▇▇张卡片全摊开，每张 ▇▇行明细 = 一屏读不完一条。
+   这一版：默认每条只有「编号 + 问题 + 你的裁决 + 状态」一行，点开才看落地明细。 */
+.lgz{
+  border:1px solid var(--rule);border-radius:14px;
+  overflow:hidden;background:var(--panel);
+}
+.lgz__r{border-top:1px solid var(--rule)}
+.lgz__r:first-child{border-top:0}
+.lgz__top{
+  display:grid;grid-template-columns:58px 1fr auto;
+  align-items:start;gap:12px;
+  padding:13px 16px;cursor:pointer;
+  transition:background .14s ease;
+}
+.lgz__top:hover{background:var(--panel-2)}
+.lgz__id{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:.04em;
+  color:var(--ink-4);padding-top:2px;
+}
+.lgz__q{font-size:13px;line-height:1.45;color:var(--ink);font-weight:600}
+.lgz__pick{
+  grid-column:2;font-size:11.5px;color:var(--ink-3);
+  margin-top:4px;line-height:1.5;padding:0 16px 12px 0;cursor:pointer;
+}
+.lgz__st{display:flex;align-items:center;gap:9px;padding-top:1px}
+.lgz__r.is-on .lgz__top{background:var(--panel-2)}
+.lgz__d{
+  display:none;padding:4px 16px 16px 70px;
+  border-top:1px dashed var(--rule);
+  background:var(--panel-2);
+}
+.lgz__r.is-on .lgz__d{display:block;animation:pkIn .24s cubic-bezier(.4,0,.2,1)}
+body.motion-off .lgz__r.is-on .lgz__d{animation:none}
+.lgz__dr{
+  display:grid;grid-template-columns:76px 1fr;gap:14px;
+  padding:9px 0;border-bottom:1px dashed var(--rule);
+  font-size:12.5px;line-height:1.62;
+}
+.lgz__dr:last-child{border-bottom:0}
+.lgz__dr i{
+  font-style:normal;
+  font-family:var(--font-mono);font-size:9.5px;letter-spacing:.05em;
+  color:var(--ink-4);padding-top:3px;
+}
+.lgz__dr span{color:var(--ink-2)}
+.lgz__dr span b{color:var(--ink)}
+.lgz__dr--left span{color:var(--signal)}
+.lgz__r--hold .lgz__id{color:var(--signal)}
+.lgz__r--act  .lgz__id{color:var(--open)}
+
+/* ── 状态色条：一眼看出这一节的健康度 ──── */
+.sbar{
+  display:flex;height:8px;border-radius:999px;overflow:hidden;
+  background:var(--rule);margin:0 0 14px;
+}
+.sbar i{display:block;height:100%}
+.sbar__lg{
+  display:flex;flex-wrap:wrap;gap:14px;
+  margin:-6px 0 18px;
+  font-family:var(--font-mono);font-size:10px;color:var(--ink-3);
+}
+.sbar__lg span{display:inline-flex;align-items:center;gap:5px}
+.sbar__lg i{width:8px;height:8px;border-radius:3px}
+.sbar__lg b{color:var(--ink);font-size:11px}
+
+/* ── 空态占位：不摆空表，只说一句 ──────── */
+.void{
+  display:flex;align-items:center;gap:14px;
+  padding:18px 20px;border-radius:14px;
+  border:1px dashed var(--signal);
+  background:var(--signal-soft);
+}
+.void__n{
+  font-family:var(--font-display);font-size:30px;line-height:1;
+  color:var(--ink);
+}
+.void__t{font-size:13px;line-height:1.55;color:var(--ink-2)}
+.void__t b{color:var(--ink)}
+
+/* ── 归口说明条瘦身 ─────────────────────
+   精简态只留一行，完整态才展开全文 */
+body:not(.dens-full) .movedbar__b .mb-more{display:none}
+.movedbar__b .mb-more{
+  display:block;margin-top:7px;
+  color:var(--ink-3);font-size:12px;
+}
+
+@media (max-width:860px){
+  .dens{display:none}
+  .lgz__r{grid-template-columns:52px 1fr auto;padding:11px 12px}
+  .lgz__d{padding-left:18px}
+}
+
+/* ── 首屏堵点卡：替掉与 KPI 条重复的 factlist ─────────────── */
+.blocker{
+  border:1px solid var(--line);border-radius:16px;padding:20px 20px 18px;
+  background:linear-gradient(160deg,rgba(224,70,70,.07),rgba(224,70,70,.02) 60%,transparent);
+  position:relative;overflow:hidden;
+}
+.blocker::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red);
+}
+.blocker__k{
+  font-size:11px;letter-spacing:.14em;color:var(--red);font-weight:700;
+  text-transform:uppercase;margin-bottom:10px;
+}
+.blocker__id{font:700 12px/1 var(--mono);color:var(--ink-3);margin-bottom:6px;letter-spacing:.06em}
+.blocker__q{font-size:19px;line-height:1.42;font-weight:650;color:var(--ink-1);letter-spacing:-.01em}
+.blocker__m{margin-top:12px;font-size:12.5px;line-height:1.6;color:var(--ink-3)}
+.blocker__m b{color:var(--ink-2);font-weight:650}
+.blocker__go{
+  display:inline-block;margin-top:14px;font-size:12.5px;font-weight:650;
+  color:var(--red);text-decoration:none;border-bottom:1px solid transparent;
+}
+.blocker__go:hover{border-bottom-color:var(--red)}
+.blocker__f{
+  margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);
+  font-size:11.5px;color:var(--ink-4);
+}
+.blocker__f b{color:var(--ink-2)}
+
+/* ── 次模块：视觉重量降一档 ───────────────
+   主模块和次模块不能长一个样，否则分级等于白做。
+   次模块：标题小一号、去掉左侧强调、结论行是它唯一的常驻内容。 */
+.block--2nd{border-left:0}
+.block--2nd .block__h h3{font-size:15px;color:var(--ink-2)}
+.block--2nd .lead{margin-top:2px}
+
+/* ── 栅格收口：别留孤儿行 ─────────────────
+   ▇▇个 KPI 在 ▇▇ 列下排成 ▇▇+▇▇+▇▇，最后一个独占一行；
+   主图组 ▇▇/▇▇ 在旧断点被改成 ▇▇/▇▇=▇▇ 列，第三张被挤下去。
+   两处都是"最后一个落单"，视觉上像出了错。 */
+@media (max-width:1500px){
+  .kstrip{grid-template-columns:repeat(4,1fr)}      /* ▇▇ = ▇▇ + ▇▇，收口整齐 */
+  .dgrid > .dcard--6{grid-column:span 6}
+  .dgrid > .dcard--3{grid-column:span 3}            /* 主图组守住 ▇▇/▇▇ */
+}
+@media (max-width:1220px){
+  .kstrip{grid-template-columns:repeat(3,1fr)}
+  .dgrid > .dcard--6{grid-column:span 12}
+  .dgrid > .dcard--3{grid-column:span 6}
+}
+@media (max-width:1080px){
+  .kstrip{grid-template-columns:repeat(2,1fr)}
+  .dgrid > .dcard--3{grid-column:span 12}
+}

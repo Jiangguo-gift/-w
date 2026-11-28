@@ -1,0 +1,240 @@
+/* ═══════════════════════════════════════════════════════════
+   mod.css —— 模块卡（四块固定结构）
+   目的：每页只剩四块，看得清主次；不承载任何过程说明。
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 卡片外壳 ───────────────────────── */
+.mx {
+  margin: 0 0 26px;
+  border: 1px solid var(--rule);
+  border-radius: 20px;
+  background: var(--card, #fff);
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(15, 18, 26, .04), 0 12px 32px -22px rgba(15, 18, 26, .16);
+}
+
+/* ① 这个模块给你什么 */
+.mx__hd {
+  padding: 24px 28px 20px;
+  background: linear-gradient(180deg, rgba(39, 224, 33, .06), rgba(39, 224, 33, 0));
+  border-bottom: 1px solid var(--rule);
+}
+.mx__k {
+  font-size: 10.5px; letter-spacing: .16em; font-weight: 800;
+  color: var(--run, #1aa314); text-transform: uppercase; margin-bottom: 10px;
+}
+.mx__k::before { content: '◆ '; opacity: .7; }
+.mx__val {
+  margin: 0; font-size: 17.5px; line-height: 1.62; color: var(--ink);
+  font-weight: 500; letter-spacing: -.01em;
+}
+.mx__val b { font-weight: 800; }
+.mx__meta {
+  margin-top: 12px; font-size: 11.5px; color: var(--ink-4);
+  font-family: var(--mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  letter-spacing: .01em; line-height: 1.6;
+}
+
+/* ②③ 两栏：能做到什么 / 你可以做什么 */
+.mx__two { display: grid; grid-template-columns: 1fr 1fr; }
+@media (max-width: 1080px) { .mx__two { grid-template-columns: 1fr; } }
+
+.mxb { padding: 22px 28px 24px; }
+.mxb--can { border-right: 1px solid var(--rule); }
+@media (max-width: 1080px) {
+  .mxb--can { border-right: 0; border-bottom: 1px solid var(--rule); }
+}
+.mxb__h {
+  font-size: 13px; font-weight: 800; color: var(--ink);
+  display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
+}
+.mxb__h i {
+  font-style: normal; font-size: 10.5px; font-weight: 700;
+  min-width: 20px; height: 18px; padding: 0 6px; border-radius: 9px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--chip, #f1f2f5); color: var(--ink-3);
+}
+.mxb--can .mxb__h::before { content: '▤'; color: var(--ink-4); font-size: 12px; }
+.mxb--do  .mxb__h::before { content: '▶'; color: var(--run, #1aa314); font-size: 11px; }
+.mxb--do  .mxb__h i { background: rgba(39, 224, 33, .14); color: #148a10; }
+
+.mxb__l { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.mxb__l > li {
+  position: relative; padding-left: 15px;
+  font-size: 13px; line-height: 1.6;
+}
+.mxb__l > li::before {
+  content: ''; position: absolute; left: 0; top: 7px;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--ink-4);
+}
+.mxb__l > li b { display: block; color: var(--ink); font-weight: 700; }
+.mxb__l > li span { display: block; color: var(--ink-3); font-size: 12.5px; margin-top: 3px; }
+.mxb__l code {
+  font-family: var(--mono, ui-monospace, Menlo, monospace);
+  font-size: 11.5px; background: var(--chip, #f1f2f5);
+  padding: 1px 5px; border-radius: 5px;
+}
+
+/* 你可以做什么：带入口按钮 */
+.mxb__l--do > li::before { background: var(--run, #27e021); }
+.mxgo {
+  display: inline-block; margin-top: 7px;
+  font-size: 11.5px; font-weight: 700; text-decoration: none;
+  color: #0f7a0b; background: rgba(39, 224, 33, .13);
+  border: 1px solid rgba(39, 224, 33, .3);
+  padding: 3px 10px; border-radius: 999px;
+  transition: background .15s ease;
+}
+.mxgo:hover { background: rgba(39, 224, 33, .24); }
+
+/* ④ 重要信息 */
+.mxk { padding: 22px 28px 26px; border-top: 1px solid var(--rule); background: var(--soft, #fafbfc); }
+.mxk__h {
+  font-size: 13px; font-weight: 800; color: var(--ink);
+  display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
+}
+.mxk__h::before { content: '★'; color: #d8a01a; font-size: 12px; }
+.mxk__h i {
+  font-style: normal; font-size: 10.5px; font-weight: 700;
+  min-width: 20px; height: 18px; padding: 0 6px; border-radius: 9px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(216, 160, 26, .16); color: #96690a;
+}
+
+.mxk__nums {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-bottom: 18px;
+}
+@media (max-width: 1180px) { .mxk__nums { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 640px)  { .mxk__nums { grid-template-columns: repeat(2, 1fr); } }
+.mxk__n {
+  border: 1px solid var(--rule); border-radius: 14px;
+  background: #fff; padding: 12px 13px 13px;
+}
+.mxk__v {
+  font-size: 21px; font-weight: 800; letter-spacing: -.02em; color: var(--ink);
+  font-family: var(--mono, ui-monospace, Menlo, monospace); line-height: 1.1;
+}
+.mxk__v i { font-style: normal; font-size: 11px; font-weight: 700; margin-left: 2px; color: var(--ink-4); }
+.mxk__t { font-size: 12px; font-weight: 700; color: var(--ink); margin-top: 6px; }
+.mxk__d { font-size: 11px; color: var(--ink-4); margin-top: 4px; line-height: 1.5; }
+
+.mxk__l { list-style: none; margin: 0; padding: 0; display: grid; gap: 11px; }
+.mxk__l > li {
+  border-left: 2px solid var(--rule); padding: 2px 0 2px 13px;
+  font-size: 13px; line-height: 1.62;
+}
+.mxk__l > li b { color: var(--ink); font-weight: 700; }
+.mxk__l > li span { display: block; color: var(--ink-3); font-size: 12.5px; margin-top: 4px; }
+
+/* ── 链接组（看板 / 数据源） ───────── */
+.mxlnk { display: grid; gap: 10px; margin: 0 0 22px; }
+.mxlnk__g {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  border: 1px solid var(--rule); border-radius: 14px; background: #fff; padding: 12px 14px;
+}
+.mxlnk__k { font-size: 11.5px; font-weight: 800; color: var(--ink-4); margin-right: 4px; }
+.mxlnk__g a {
+  font-size: 12px; font-weight: 600; text-decoration: none; color: var(--ink);
+  border: 1px solid var(--rule); border-radius: 999px; padding: 4px 11px;
+  background: var(--soft, #fafbfc); transition: border-color .15s ease;
+}
+.mxlnk__g a:hover { border-color: var(--run, #27e021); }
+
+/* ── 等你定的 ───────────────────────── */
+.mxask { margin: 4px 0 22px; }
+.mxask__h {
+  font-size: 13px; font-weight: 800; color: var(--ink);
+  display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 12px;
+}
+.mxask__h::before { content: '⚑'; color: #e0552b; }
+.mxask__h span { font-size: 11.5px; font-weight: 500; color: var(--ink-4); }
+
+/* ── 高阶指令库 ─────────────────────── */
+.mxcmd { margin: 0 0 22px; }
+.mxcmd__h {
+  font-size: 13px; font-weight: 800; color: var(--ink);
+  display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 12px;
+}
+.mxcmd__h::before { content: '⌘'; color: var(--ink-4); }
+.mxcmd__h span { font-size: 11.5px; font-weight: 500; color: var(--ink-4); }
+.mxcmd__i { border: 1px solid var(--rule); border-radius: 14px; background: #fff; margin-bottom: 10px; overflow: hidden; }
+.mxcmd__t {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 12px 14px; font-size: 13px; font-weight: 700; color: var(--ink);
+  border-bottom: 1px solid var(--rule); background: var(--soft, #fafbfc);
+}
+.mxcmd__b {
+  margin: 0; padding: 13px 14px; font-size: 11.5px; line-height: 1.7;
+  font-family: var(--mono, ui-monospace, Menlo, monospace);
+  color: var(--ink-2, #3b4048); white-space: pre-wrap; word-break: break-word;
+  max-height: 260px; overflow: auto;
+}
+
+/* ── 已定过的（只显示你定了什么，不展开我改了什么） ── */
+.dnl { margin: 0 0 22px; border: 1px solid var(--rule); border-radius: 14px; background: #fff; overflow: hidden; }
+.dnl__h {
+  padding: 12px 14px; font-size: 12.5px; font-weight: 800; color: var(--ink-3);
+  background: var(--soft, #fafbfc); border-bottom: 1px solid var(--rule);
+}
+.dnl__i {
+  display: grid; grid-template-columns: 64px 1fr 1fr; gap: 12px;
+  padding: 10px 14px; font-size: 12.5px; border-bottom: 1px solid var(--rule);
+}
+.dnl__i:last-child { border-bottom: 0; }
+@media (max-width: 780px) { .dnl__i { grid-template-columns: 1fr; gap: 4px; } }
+.dnl__id { font-family: var(--mono, ui-monospace, Menlo, monospace); font-size: 11px; color: var(--ink-4); }
+.dnl__q { color: var(--ink-3); }
+.dnl__c { color: var(--ink); font-weight: 700; }
+
+/* ── 章节头：去掉冗余描述 ───────────── */
+.sec__t p.sec__q { display: none; }
+
+/* ── 我没照你字面执行的（只在「重要事项确认」页出现）
+   依据：AIME.md §0-1-b 第 ▇▇块，她要求这一组必须单独亮出来、不许埋在正文里。
+   这不是"我的过程"，是她监督我的入口，所以 R-538 不覆盖它。 ── */
+.dvi { margin: 0 0 22px; border: 1px solid #f0c98a; border-radius: 14px; background: #fffdf7; overflow: hidden; }
+.dvi__h {
+  padding: 12px 14px; font-size: 12.5px; font-weight: 800; color: #8a5a12;
+  background: #fff6e6; border-bottom: 1px solid #f0c98a;
+}
+.dvi__h span { float: right; font-weight: 600; color: #a97b3a; font-size: 11.5px; }
+.dvi__i { padding: 12px 14px; border-bottom: 1px solid #f4e3c6; }
+.dvi__i:last-child { border-bottom: 0; }
+.dvi__t { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.6; }
+.dvi__w { margin-top: 4px; font-size: 12.5px; color: var(--ink-3); line-height: 1.75; }
+.dvi__n { margin-top: 6px; font-size: 12px; color: #8a5a12; font-weight: 700; }
+
+/* ── 说明折叠区（2026-09-13 她第四轮圈选 / R-554）───────────
+   「所有涉及描述性的模块无具体事项的都隐藏，都不要列出设置二级标题」
+   模块定位 / 已具备能力 / 可执行动作 / 能力评价与短板 四块搬到这里：
+   默认收起、一条横杠；点一下展开，内容一条没删。 ── */
+.mxfold { border-top: 1px solid var(--rule); background: var(--soft, #fafbfc); }
+.mx--slim .mxfold { border-top: 0; }
+.mxfold__s {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 13px 28px; font-size: 12.5px; color: var(--ink-3);
+  transition: background .15s ease;
+}
+.mxfold__s::-webkit-details-marker { display: none; }
+.mxfold__s::before {
+  content: '▸'; font-size: 11px; color: var(--ink-4);
+  transition: transform .18s ease; display: inline-block;
+}
+.mxfold[open] > .mxfold__s::before { transform: rotate(90deg); }
+.mxfold__s:hover { background: var(--chip, #f1f2f5); }
+.mxfold__k { font-weight: 700; color: var(--ink-3); }
+.mxfold__hint {
+  font-style: normal; font-size: 11px; color: var(--ink-4);
+  border: 1px solid var(--rule); border-radius: 999px; padding: 2px 9px;
+  background: #fff;
+}
+.mxfold__b { border-top: 1px solid var(--rule); background: var(--card, #fff); }
+.mxfold__b > .mx__hd { border-bottom: 1px solid var(--rule); }
+.mxfold__b > .mxs { border-top: 1px solid var(--rule); }
+@media (max-width: 640px) {
+  .mxfold__s { padding: 12px 16px; }
+}
+
+/* 重要信息现在是模块卡里第一块，不再需要那条分隔线 */
+.mx > .mxk:first-child { border-top: 0; }

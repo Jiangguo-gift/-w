@@ -1,0 +1,325 @@
+/* ═══════════════════════════════════════════════════════════════════
+   aurora.css —— 「云端极光玻璃」画风层（v1）
+   载入顺序必须最最后：theme → … → mod → hub → ui → aurora
+   ───────────────────────────────────────────────────────────────────
+   触发方式：body 同时带 .candy-light .aurora
+     · 极光   = candy-light + aurora   （默认）
+     · 糖果昼 = candy-light            （原样，一键可切回）
+     · 糖果夜 = 都不带
+   这一层只做画风，不改结构、不改文案、不动 R-538 四块顺序、
+   不动语义四色（绿=在跑 / 黄=机会 / 粉=需决策 / 蓝=对照）。
+   数值全部来自 AURORA-STYLE.md + aurora.tokens.json。
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── ▇▇. 令牌覆盖 ─────────────────────────────────────── */
+body.aurora {
+  --paper: #EDEFF6;
+  --os-shell: #EDEFF6;
+  --panel: #FFFFFF;
+  --panel-2: #F7F8FD;
+  --card: #FFFFFF;
+  --soft: #F7F8FD;
+  --chip: #EEF0F9;
+
+  --ink: #171A2B;
+  --ink-2: #3B4055;
+  --ink-3: #5E6478;
+  --ink-4: #8B90A4;
+
+  --rule: rgba(23, 26, 43, .07);
+  --rule-2: rgba(23, 26, 43, .13);
+  --rule-3: rgba(23, 26, 43, .28);
+
+  /* 主色：认知紫往蓝挪一档，跟极光底同族 */
+  --os-vi: #5C63E6;
+  --os-vi-2: #8B8CF2;
+  --os-vi-w: rgba(92, 99, 230, .09);
+  --brand: #5C63E6;
+  --brand-w: rgba(92, 99, 230, .075);
+
+  /* 阴影：淡、长、低透明；分层靠它，不靠边框 */
+  --sh-1: 0 1px 2px rgba(28, 32, 74, .04);
+  --sh-2: 0 2px 8px rgba(28, 32, 74, .045), 0 16px 38px -24px rgba(28, 32, 74, .24);
+  --sh-3: 0 10px 24px rgba(28, 32, 74, .06), 0 36px 72px -34px rgba(28, 32, 74, .30);
+
+  /* 玻璃与画布 */
+  --au-glass: linear-gradient(180deg, rgba(255, 255, 255, .74), rgba(255, 255, 255, .52));
+  --au-glass-br: rgba(255, 255, 255, .74);
+  --au-canvas-sh: 0 24px 60px -36px rgba(28, 32, 74, .34);
+  --au-hi: inset 0 1px 0 rgba(255, 255, 255, .9);
+
+  /* 极光点缀（只做装饰与分类，不参与业务语义） */
+  --au-indigo: #E6E9FE; --au-indigo-i: #3C43C9;
+  --au-violet: #EFE8FD; --au-violet-i: #6D3FC8;
+  --au-mint:   #E2F5EF; --au-mint-i:   #17795C;
+  --au-amber:  #FDF0DC; --au-amber-i:  #8A5A08;
+  --au-rose:   #FCE9F1; --au-rose-i:   #A83370;
+
+  --r-canvas: 28px;
+  --r-card: 20px;
+  --r-ctl: 12px;
+}
+
+/* ── ▇▇. 底：极光四团，去点阵 ─────────────────────────── */
+/* 直接画在 body 背景上并固定，比 ::before + filter:blur 更稳也更省 GPU */
+body.aurora {
+  background:
+    radial-gradient(58vw 52vw at 8% -6%,   rgba(134, 166, 255, .60), rgba(134, 166, 255, 0) 62%),
+    radial-gradient(52vw 46vw at 96% 2%,   rgba(188, 156, 255, .52), rgba(188, 156, 255, 0) 64%),
+    radial-gradient(56vw 52vw at 80% 104%, rgba(140, 226, 208, .44), rgba(140, 226, 208, 0) 66%),
+    radial-gradient(46vw 44vw at 10% 94%,  rgba(255, 198, 164, .38), rgba(255, 198, 164, 0) 66%),
+    #E9ECF6;
+  background-attachment: fixed;
+}
+body.aurora::before { display: none !important; }
+body.aurora::after { opacity: 0 !important; background-image: none !important; }
+body.aurora ::selection { background: rgba(92, 99, 230, .20); color: var(--ink); }
+
+/* ── ▇▇. 侧栏：半透明白玻璃，无硬边界 ─────────────────── */
+body.aurora .rail {
+  background: linear-gradient(180deg, rgba(255, 255, 255, .72), rgba(255, 255, 255, .44));
+  backdrop-filter: blur(22px) saturate(1.35);
+  -webkit-backdrop-filter: blur(22px) saturate(1.35);
+  border-right: 1px solid rgba(255, 255, 255, .7);
+  box-shadow: 1px 0 0 rgba(23, 26, 43, .04);
+}
+body.aurora .osbrand { border-bottom-color: rgba(23, 26, 43, .06); }
+body.aurora .osbrand__av {
+  background: linear-gradient(140deg, #6D74F0, #A98BFA);
+  box-shadow: 0 8px 18px -8px rgba(92, 99, 230, .55);
+  border-radius: 12px;
+}
+body.aurora .osi { border-radius: 999px; }
+body.aurora .osi:hover { background: rgba(255, 255, 255, .78); }
+body.aurora .osi.is-on {
+  background: #FFFFFF;
+  box-shadow: 0 1px 2px rgba(28, 32, 74, .05), 0 10px 22px -16px rgba(28, 32, 74, .35);
+}
+body.aurora .osi.is-on::before { left: 6px; border-radius: 999px; height: 14px; }
+body.aurora .osme__hint { border-radius: 14px; border-style: solid; border-color: rgba(23, 26, 43, .09); background: rgba(255, 255, 255, .5); }
+body.aurora .osme__av { border-radius: 999px; background: #FFFFFF; box-shadow: var(--sh-1); }
+
+/* ── ▇▇. 顶栏：通透，无底线 ──────────────────────────── */
+body.aurora .topbar {
+  background: linear-gradient(180deg, rgba(237, 239, 246, .82), rgba(237, 239, 246, .44));
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid rgba(255, 255, 255, .6);
+}
+body.aurora .tbtn, body.aurora #osFold {
+  border-radius: 999px;
+  border-color: rgba(23, 26, 43, .09);
+  background: rgba(255, 255, 255, .82);
+  box-shadow: var(--sh-1);
+}
+body.aurora #osFold { border-radius: 12px; }
+body.aurora .tbtn:hover, body.aurora #osFold:hover {
+  background: #FFFFFF; border-color: rgba(23, 26, 43, .16); color: var(--ink);
+}
+body.aurora .tbtn.is-on, body.aurora .tbtn--solid {
+  background: var(--ink); border-color: var(--ink); color: #FFFFFF;
+  box-shadow: 0 8px 18px -10px rgba(23, 26, 43, .55);
+}
+body.aurora .tbtn__kbd { border-color: rgba(255, 255, 255, .3); }
+
+/* ── ▇▇. 主画布：每个模块装进一张大圆角半透明白板 ────── */
+body.aurora .sec.is-view {
+  margin: 16px 26px 34px;
+  padding: 28px 32px 24px;
+  border-radius: var(--r-canvas);
+  background: var(--au-glass);
+  backdrop-filter: blur(20px) saturate(1.28);
+  -webkit-backdrop-filter: blur(20px) saturate(1.28);
+  border: 1px solid var(--au-glass-br);
+  box-shadow: var(--au-canvas-sh), var(--au-hi);
+  background-image:
+    radial-gradient(120% 180px at 0% 0%, rgba(150, 176, 255, .16), rgba(150, 176, 255, 0) 70%),
+    radial-gradient(90% 160px at 100% 0%, rgba(196, 168, 255, .14), rgba(196, 168, 255, 0) 70%),
+    var(--au-glass);
+}
+body.aurora.hero-on .sec.is-view { padding-top: 22px; }
+body.aurora .sec__head { border-bottom-color: rgba(23, 26, 43, .07); }
+body.aurora .sec__t h2 { font-size: 32px; font-weight: 760; letter-spacing: -.032em; }
+body.aurora .bzsec__h h3, body.aurora .bzv__h { font-weight: 760; letter-spacing: -.028em; }
+body.aurora .pagefoot__grid { border-top-color: rgba(23, 26, 43, .07); }
+body.aurora .mnav {
+  border-radius: 999px; padding: 6px 8px;
+  background: rgba(255, 255, 255, .9);
+  border-color: rgba(255, 255, 255, .8);
+  box-shadow: 0 2px 8px rgba(28, 32, 74, .05), 0 14px 30px -22px rgba(28, 32, 74, .3);
+}
+body.aurora .mnav__a { border-radius: 999px; }
+body.aurora .mnav__a.is-here { background: var(--ink); color: #fff; }
+
+/* ── ▇▇. 卡片：实白 + 更大圆角 + 更淡阴影 + hover 上浮 ── */
+body.aurora .mx,
+body.aurora .bizs,
+body.aurora .bcard,
+body.aurora .bzv,
+body.aurora .viz,
+body.aurora .dpanel,
+body.aurora .pln,
+body.aurora .ask,
+body.aurora .fbnote,
+body.aurora .rv,
+body.aurora .rvw__g,
+body.aurora .gl,
+body.aurora .thk,
+body.aurora .mem,
+body.aurora .eco,
+body.aurora .pano,
+body.aurora .vst,
+body.aurora .adv,
+body.aurora .inbox,
+body.aurora .dnl,
+body.aurora .dvi,
+body.aurora .mxcmd__i,
+body.aurora .mxlnk__g,
+body.aurora .hub__c,
+body.aurora .hub__qbox input {
+  border-radius: var(--r-card);
+  border-color: rgba(23, 26, 43, .065);
+}
+body.aurora .mx,
+body.aurora .bizs,
+body.aurora .bcard,
+body.aurora .bzv,
+body.aurora .viz,
+body.aurora .dpanel { box-shadow: var(--sh-2); }
+
+body.aurora .mxk__n,
+body.aurora .dquick__i,
+body.aurora .bzm__i,
+body.aurora .bzsrc__i,
+body.aurora .hub__c,
+body.aurora .panoi,
+body.aurora .dnl__i,
+body.aurora .dvi__i,
+body.aurora .memc,
+body.aurora .ecob__me,
+body.aurora .rvj__i,
+body.aurora .rvo__i,
+body.aurora .rvai__c,
+body.aurora .gl__i,
+body.aurora .thk__i,
+body.aurora .vst__i,
+body.aurora .fbi,
+body.aurora .dcard,
+body.aurora .tcard,
+body.aurora .tpl,
+body.aurora .asset__c,
+body.aurora .kstrip__i {
+  border-radius: 16px;
+  transition: transform .18s cubic-bezier(.16, 1, .3, 1), box-shadow .18s ease, border-color .18s ease;
+}
+body.aurora .mxk__n:hover,
+body.aurora .dquick__i:hover,
+body.aurora .bzsrc__i:hover,
+body.aurora .hub__c:hover,
+body.aurora .dcard:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(28, 32, 74, .05), 0 22px 44px -28px rgba(28, 32, 74, .32);
+}
+body.aurora .mx__hd { background: linear-gradient(180deg, rgba(92, 99, 230, .05), transparent 78%); }
+body.aurora .mxb--can { background: rgba(247, 248, 253, .85); }
+body.aurora .mxk { background: rgba(247, 248, 253, .8); }
+
+/* ── ▇▇. 胶囊：标签 / 分类 / 小控件一律全圆角 ─────────── */
+body.aurora .hub__tab,
+body.aurora .hub__tag,
+body.aurora .hub__q,
+body.aurora .cchip,
+body.aurora .chip,
+body.aurora .mx__meta .mchip,
+body.aurora .bizs__tag,
+body.aurora .pano__tag,
+body.aurora .gl__tag,
+body.aurora .rv__tag,
+body.aurora .gr__tag,
+body.aurora .rvs__tag,
+body.aurora .ask__tag,
+body.aurora .bzv__tag,
+body.aurora .mxgo,
+body.aurora .mxlnk__g a,
+body.aurora .viz__tab,
+body.aurora .mnav__a,
+body.aurora .hclaim,
+body.aurora .jumpstrip__i { border-radius: 999px; }
+body.aurora .hub__tag { background: var(--au-indigo); color: var(--au-indigo-i); border-color: transparent; }
+body.aurora .hub__c:nth-child(4n+2) .hub__tag { background: var(--au-violet); color: var(--au-violet-i); }
+body.aurora .hub__c:nth-child(4n+3) .hub__tag { background: var(--au-mint);   color: var(--au-mint-i); }
+body.aurora .hub__c:nth-child(4n)   .hub__tag { background: var(--au-amber);  color: var(--au-amber-i); }
+body.aurora .mx__meta .mchip { background: rgba(255, 255, 255, .78); }
+body.aurora .viz__tab { background: rgba(247, 248, 253, .9); }
+body.aurora .viz__tab[aria-selected="true"] { background: var(--ink); color: #fff; }
+
+/* ── ▇▇. 主行动按钮：近黑胶囊（参考图最强记忆点） ─────── */
+body.aurora .hub__use,
+body.aurora .cmdbar__go,
+body.aurora .ask__go,
+body.aurora .vst__go,
+body.aurora .bizs__go,
+body.aurora .blocker__go,
+body.aurora .annot__send {
+  background: var(--ink) !important;
+  border-color: var(--ink) !important;
+  color: #FFFFFF !important;
+  border-radius: 999px !important;
+  box-shadow: 0 8px 18px -10px rgba(23, 26, 43, .55);
+}
+body.aurora .hub__use:hover,
+body.aurora .cmdbar__go:hover,
+body.aurora .ask__go:hover { background: #24283C !important; }
+body.aurora .hub__go, body.aurora .hub__more, body.aurora .bcard__go {
+  border-radius: 999px; border-color: rgba(23, 26, 43, .1); background: rgba(255, 255, 255, .9);
+}
+body.aurora .hub__tab.is-on { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+/* ── ▇▇. 字：标题克制，正文更疏 ──────────────────────── */
+body.aurora { font-size: 14px; }
+body.aurora .mxb__l > li,
+body.aurora .mxk__l > li,
+body.aurora .pln__pts li,
+body.aurora .hub__d,
+body.aurora .pagefoot p { line-height: 1.72; }
+body.aurora .mx__val { line-height: 1.7; }
+body.aurora .mx__k { letter-spacing: .14em; }
+
+/* ── ▇▇. 浮层：指令条 / 命令面板 / 抽屉 / Tweaks ──────── */
+body.aurora .cmdbar,
+body.aurora .pal__box,
+body.aurora .drawer,
+body.aurora .tweaks__panel,
+body.aurora .tpop,
+body.aurora .qdrawer {
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .94), rgba(255, 255, 255, .86));
+  backdrop-filter: blur(24px) saturate(1.35);
+  -webkit-backdrop-filter: blur(24px) saturate(1.35);
+  border: 1px solid rgba(255, 255, 255, .8);
+  box-shadow: var(--sh-3);
+}
+body.aurora .cmdbar__in, body.aurora .pal__in { border-radius: 999px; }
+body.aurora .tweaks__toggle { border-radius: 999px; box-shadow: var(--sh-2); background: rgba(255, 255, 255, .9); }
+body.aurora .seg { border-radius: 999px; }
+body.aurora .seg button { border-radius: 999px; }
+body.aurora .toast { border-radius: 999px; }
+
+/* ── ▇▇. 图表：网格线更淡，跟画风一致 ───────────────── */
+body.aurora .viz__plot .vgrid { stroke: rgba(23, 26, 43, .06); }
+body.aurora .viz__tip { border-radius: 14px; }
+
+/* ── ▇▇. 窄屏：画布贴边收窄，别浪费横向 ─────────────── */
+@media (max-width: 900px) {
+  body.aurora .sec.is-view {
+    margin: 8px 5px 18px;
+    padding: 18px 9px 14px;
+    border-radius: 20px;
+  }
+  body.aurora .rail { backdrop-filter: blur(26px) saturate(1.4); -webkit-backdrop-filter: blur(26px) saturate(1.4); }
+}
+
+/* 关掉动效时不要有位移 */
+body.aurora.motion-off .mxk__n:hover,
+body.aurora.motion-off .dquick__i:hover,
+body.aurora.motion-off .hub__c:hover { transform: none; }

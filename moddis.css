@@ -1,0 +1,240 @@
+/* ═══════════════════════════════════════════════════════════
+   moddis.css —— 非数据类模块「提炼卡」样式
+   与 ovhero / zonehero 同族色系与圆角，不新增品牌色，只在模块头部
+   立一张「大标题 + chips + 两列卡」的呈现基座。
+   参考：image-7c826d2a.png（Units Operate From Virtual Devices）
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 容器 ───────────────────────────────────────────────── */
+.mxdi {
+  position: relative;
+  margin: 8px 0 22px;
+  padding: 24px 24px 22px;
+  background: linear-gradient(180deg,
+    rgba(122, 90, 240, 0.045) 0%,
+    rgba(122, 90, 240, 0.02) 40%,
+    rgba(255, 255, 255, 0) 100%),
+    var(--panel, #fff);
+  border: 1px solid var(--rule, rgba(0, 0, 0, 0.06));
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(30, 27, 75, 0.03);
+}
+
+/* ── 头部：眉标 + 大标题 + 一句话 + chips ── */
+.mxdi__head { margin-bottom: 14px; }
+.mxdi__eyebrow {
+  display: inline-block;
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  color: var(--signal, #7a5af0);
+  background: rgba(122, 90, 240, 0.09);
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+.mxdi__eyebrow[data-grp="mind"] {
+  color: #4a7bd6; background: rgba(74, 123, 214, 0.09);
+}
+.mxdi__eyebrow[data-grp="sys"] {
+  color: #b06a2e; background: rgba(176, 106, 46, 0.09);
+}
+.mxdi__eyebrow[data-grp="biz"] {
+  color: #2f9970; background: rgba(47, 153, 112, 0.09);
+}
+.mxdi__title {
+  font-family: var(--font-display, inherit);
+  font-size: 22px;
+  line-height: 1.28;
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: var(--ink, #1a1a2c);
+  letter-spacing: 0.003em;
+}
+.mxdi__sub {
+  margin: 0 0 12px;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--ink-2, #444458);
+  max-width: 920px;
+}
+.mxdi__sub b { color: var(--ink, #1a1a2c); font-weight: 600; }
+
+.mxdi__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+.mxdi__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  font-size: 12.5px;
+  color: var(--ink-2, #444458);
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 999px;
+  line-height: 1.4;
+  transition: all 0.12s ease;
+}
+.mxdi__chip:hover { background: #fff; color: var(--ink, #1a1a2c); }
+
+/* ── 两列 body ── */
+.mxdi__body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 12px;
+}
+.mxdi__body[data-cols="one"] { grid-template-columns: 1fr; }
+
+.mxdi__col {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 14px;
+  padding: 16px 18px;
+}
+.mxdi__ch {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--ink-3, #6d6d80);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+/* ── 左列 · 核心提炼清单 ── */
+.mxdi__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.mxdi__li {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 10px;
+  align-items: flex-start;
+}
+.mxdi__ic {
+  width: 22px; height: 22px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  font-size: 12px;
+  line-height: 1;
+  flex: 0 0 auto;
+}
+.mxdi__li.is-ok .mxdi__ic {
+  background: rgba(47, 153, 112, 0.12);
+  color: #2f9970;
+}
+.mxdi__li.is-todo .mxdi__ic {
+  background: rgba(176, 106, 46, 0.12);
+  color: #b06a2e;
+  border: 1px dashed rgba(176, 106, 46, 0.4);
+  font-weight: 600;
+}
+.mxdi__li_b {
+  display: flex; flex-direction: column; gap: 3px;
+  font-size: 13px; line-height: 1.6;
+}
+.mxdi__li_k {
+  color: var(--ink, #1a1a2c);
+  font-weight: 600;
+  font-size: 12.5px;
+}
+.mxdi__li_t {
+  color: var(--ink-2, #444458);
+}
+.mxdi__li_t b { color: var(--ink, #1a1a2c); font-weight: 600; }
+
+/* ── 右列 · 你可以立刻做的 ── */
+.mxdi__do {
+  list-style: none;
+  padding: 0; margin: 0;
+  counter-reset: mxdo;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.mxdi__doi { counter-increment: mxdo; }
+.mxdi__act {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.12s ease;
+}
+.mxdi__act::before {
+  content: counter(mxdo);
+  display: grid; place-items: center;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--signal, #7a5af0);
+  background: rgba(122, 90, 240, 0.1);
+  flex: 0 0 auto;
+}
+.mxdi__act:hover {
+  background: rgba(122, 90, 240, 0.05);
+  border-color: rgba(122, 90, 240, 0.15);
+}
+.mxdi__act_lbl {
+  min-width: 0;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.mxdi__act_t {
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--ink, #1a1a2c);
+  font-weight: 500;
+  display: block;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+.mxdi__act_d {
+  display: block;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--ink-3, #6d6d80);
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+.mxdi__act_go {
+  font-size: 15px;
+  color: var(--signal, #7a5af0);
+  font-style: normal;
+  opacity: 0.6;
+  transition: transform 0.12s ease, opacity 0.12s ease;
+}
+.mxdi__act:hover .mxdi__act_go {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+/* ── 反馈入口简化壳 ── */
+.mxdi--fb {
+  padding: 20px 24px 18px;
+  background: rgba(0, 0, 0, 0.015);
+}
+.mxdi--fb .mxdi__title { font-size: 18px; margin-bottom: 6px; }
+.mxdi--fb .mxdi__sub { font-size: 13px; margin: 0; }
+
+/* ── 响应式：小屏堆一列 ── */
+@media (max-width: 820px) {
+  .mxdi { padding: 20px 18px 18px; margin: 6px 0 18px; }
+  .mxdi__body { grid-template-columns: 1fr; gap: 12px; }
+  .mxdi__title { font-size: 20px; }
+}

@@ -1,0 +1,191 @@
+{
+  "name": "Aurora Glass",
+  "version": "▇▇",
+  "source": {
+    "image": "image-7c826d2a.png",
+    "size": "1440x1080",
+    "method": "pixel sampling + visual structure analysis",
+    "sampled_at": "2026-09-13"
+  },
+  "style": {
+    "family": "Soft-Light SaaS / Aurora Glass",
+    "peers": [
+      "Linear",
+      "Framer",
+      "Raycast",
+      "Vercel landing 2025"
+    ],
+    "traits": [
+      "pale gray-blue aurora background",
+      "translucent white large-radius canvas floating above",
+      "oversized radii + very soft long shadows instead of borders",
+      "achromatic base with low-saturation macaron accents"
+    ]
+  },
+  "color": {
+    "neutral": {
+      "outer": "#DADEE7",
+      "paper": "#EDEFF6",
+      "canvasGlass": "rgba(255,255,255,.66)",
+      "card": "#FFFFFF",
+      "soft": "#F7F8FD",
+      "chip": "#EEF0F9",
+      "ink": "#171A2B",
+      "ink2": "#3B4055",
+      "ink3": "#5E6478",
+      "ink4": "#8B90A4",
+      "rule": "rgba(23,26,43,.07)",
+      "rule2": "rgba(23,26,43,.13)",
+      "rule3": "rgba(23,26,43,.28)"
+    },
+    "aurora": [
+      {
+        "at": "▇▇ ▇▇",
+        "color": "rgba(150,178,255,.42)",
+        "note": "blue"
+      },
+      {
+        "at": "▇▇ ▇▇",
+        "color": "rgba(196,170,255,.34)",
+        "note": "violet"
+      },
+      {
+        "at": "▇▇ ▇▇",
+        "color": "rgba(158,226,214,.28)",
+        "note": "mint"
+      },
+      {
+        "at": "▇▇ ▇▇",
+        "color": "rgba(255,206,180,.22)",
+        "note": "peach"
+      }
+    ],
+    "auroraBlur": "56px",
+    "macaron": {
+      "indigo": {
+        "bg": "#E6E9FE",
+        "ink": "#3C43C9"
+      },
+      "violet": {
+        "bg": "#EFE8FD",
+        "ink": "#6D3FC8"
+      },
+      "mint": {
+        "bg": "#E2F5EF",
+        "ink": "#17795C"
+      },
+      "amber": {
+        "bg": "#FDF0DC",
+        "ink": "#8A5A08"
+      },
+      "rose": {
+        "bg": "#FCE9F1",
+        "ink": "#A83370"
+      }
+    },
+    "brand": "#5C63E6",
+    "semanticLocked": {
+      "note": "业务语义色不随主题变化",
+      "run": "#0E9E0A",
+      "open": "#B98400",
+      "signal": "#C7318C",
+      "info": "#0C7FBE"
+    }
+  },
+  "typography": {
+    "familyLatin": "Inter, SF Pro, Plus Jakarta Sans, system-ui",
+    "familyCJK": "PingFang SC, Hiragino Sans GB, Microsoft YaHei",
+    "scale": {
+      "displayRef": {
+        "size": "64px",
+        "weight": 600,
+        "tracking": "-0.02em"
+      },
+      "h1": {
+        "size": "40px",
+        "weight": 800,
+        "tracking": "-0.025em"
+      },
+      "h2": {
+        "size": "22px",
+        "weight": 800,
+        "tracking": "-0.02em"
+      },
+      "h3": {
+        "size": "15px",
+        "weight": 750
+      },
+      "body": {
+        "size": "13.5px",
+        "lineHeight": 1.72
+      },
+      "fine": {
+        "size": "11.5px",
+        "color": "ink4"
+      }
+    },
+    "numeric": "tabular-nums, tighter tracking"
+  },
+  "radius": {
+    "canvas": "28px",
+    "card": "20px",
+    "control": "12px",
+    "pill": "999px"
+  },
+  "shadow": {
+    "s1": "▇▇ 1px 2px rgba(28,32,74,.04)",
+    "s2": "▇▇ 2px 8px rgba(28,32,74,.045), ▇▇ 16px 38px -24px rgba(28,32,74,.24)",
+    "s3": "▇▇ 10px 24px rgba(28,32,74,.06), ▇▇ 36px 72px -34px rgba(28,32,74,.30)",
+    "canvas": "▇▇ 24px 60px -36px rgba(28,32,74,.34)",
+    "innerHighlight": "inset ▇▇ 1px ▇▇ rgba(255,255,255,.9)"
+  },
+  "glass": {
+    "fill": "linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.60))",
+    "border": "1px solid rgba(255,255,255,.72)",
+    "filter": "blur(20px) saturate(1.3)",
+    "allowedOn": [
+      "sidebar",
+      "topbar",
+      "main canvas",
+      "command bar",
+      "overlays"
+    ],
+    "forbiddenOn": [
+      "content cards",
+      "table rows",
+      "list items"
+    ]
+  },
+  "spacing": {
+    "base": 4,
+    "cardPadding": "18px 20px",
+    "canvasPadding": "28px 30px 20px",
+    "sectionGap": "28px"
+  },
+  "motion": {
+    "hoverLift": "translateY(-1px)",
+    "duration": "160ms",
+    "easing": "cubic-bezier(.16,▇▇,.3,1)"
+  },
+  "rules": [
+    "whitespace first",
+    "no radius below 10px",
+    "layer with shadow, not borders",
+    "color accents under 10% of surface",
+    "strict type scale, generous line-height"
+  ],
+  "buttons": {
+    "primary": {
+      "bg": "#171A2B",
+      "fg": "#FFFFFF",
+      "radius": "999px",
+      "shadow": "▇▇ 8px 18px -10px rgba(23,26,43,.55)"
+    },
+    "secondary": {
+      "bg": "#FFFFFF",
+      "fg": "#3B4055",
+      "border": "rgba(23,26,43,.10)",
+      "radius": "999px"
+    }
+  }
+}

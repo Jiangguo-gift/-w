@@ -1,0 +1,159 @@
+/* ═══════════════════════════════════════════════════════════
+   驾驶舱 · 图表总览层
+   沿用 theme.css 的 token（纸质 / 发丝线 / 零圆角 / 三语义色）
+   只新增布局与图表容器，不引入任何新色相
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 指标条 ───────────────────────────── */
+.kstrip{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));
+  border:1px solid var(--rule-2);border-bottom-width:2px;
+  background:var(--panel);
+  margin-bottom:var(--s5);
+}
+.kstrip__i{
+  position:relative;padding:var(--s4) var(--s4) var(--s3);
+  border-right:1px solid var(--rule);min-width:0;
+}
+.kstrip__i:last-child{border-right:0}
+.kstrip__i::before{
+  content:"";position:absolute;left:0;top:0;width:0;height:2px;
+  background:var(--ink);transition:width var(--dur) var(--ease);
+}
+.kstrip__i:hover::before{width:100%}
+.kstrip__i[data-tone="signal"]::before{background:var(--signal)}
+.kstrip__i[data-tone="run"]::before{background:var(--run)}
+.kstrip__i[data-tone="open"]::before{background:var(--open)}
+.kstrip__i[data-tone="signal"]{background:var(--signal-w)}
+
+.kstrip__k{
+  font:400 10.5px/1.4 var(--font-mono);letter-spacing:.1em;
+  color:var(--ink-3);text-transform:uppercase;
+  display:flex;align-items:center;gap:6px;
+}
+.kstrip__v{
+  font:400 40px/1.02 var(--font-display);color:var(--ink);
+  margin:10px 0 6px;letter-spacing:-.01em;font-variant-numeric:tabular-nums;
+}
+.kstrip__i[data-tone="signal"] .kstrip__v{color:var(--signal)}
+.kstrip__v small{font:400 12px/1 var(--font-mono);color:var(--ink-3);margin-left:5px;letter-spacing:0}
+.kstrip__d{
+  font-size:11.5px;line-height:1.5;color:var(--ink-2);
+  text-wrap:pretty;min-height:2lh;
+}
+.kstrip__d b{color:var(--ink);font-weight:600}
+.kstrip__spark{height:22px;margin-top:8px}
+
+/* ── 图表栅格 ─────────────────────────── */
+.dgrid{
+  display:grid;grid-template-columns:repeat(12,1fr);
+  gap:1px;background:var(--rule);
+  border:1px solid var(--rule-2);
+  margin-bottom:var(--s5);
+}
+.dcard{
+  background:var(--panel);padding:var(--s4);
+  display:flex;flex-direction:column;min-width:0;
+  position:relative;
+}
+.dcard--3{grid-column:span 3}
+.dcard--4{grid-column:span 4}
+.dcard--5{grid-column:span 5}
+.dcard--6{grid-column:span 6}
+.dcard--7{grid-column:span 7}
+.dcard--8{grid-column:span 8}
+.dcard--12{grid-column:span 12}
+
+.dcard__h{
+  display:flex;align-items:baseline;gap:var(--s2);
+  padding-bottom:var(--s2);margin-bottom:var(--s3);
+  border-bottom:1px solid var(--rule);
+}
+.dcard__t{
+  font:600 13.5px/1.3 var(--font-body);color:var(--ink);letter-spacing:.01em;
+}
+.dcard__m{
+  font:400 10.5px/1.4 var(--font-mono);color:var(--ink-4);
+  margin-left:auto;white-space:nowrap;letter-spacing:.02em;
+}
+.dcard__a{
+  font:400 10.5px/1.4 var(--font-mono);color:var(--ink-3);
+  text-decoration:none;border-bottom:1px solid transparent;white-space:nowrap;
+}
+.dcard__a:hover{color:var(--signal);border-bottom-color:var(--signal)}
+
+.dchart{width:100%;flex:1 1 auto;min-height:0}
+.dcard__f{
+  margin-top:var(--s3);padding-top:var(--s2);
+  border-top:1px dashed var(--rule);
+  font-size:11.5px;line-height:1.6;color:var(--ink-2);text-wrap:pretty;
+}
+.dcard__f b{color:var(--ink);font-weight:600}
+.dcard__f em{font-style:normal;color:var(--signal);font-weight:600}
+
+/* 空缺高亮时，含缺口的卡片留一道红边 */
+body.gap-on .dcard[data-gap="▇▇"]{box-shadow:inset 3px 0 0 var(--signal)}
+
+/* ── 卡片内的小图例 ───────────────────── */
+.dlg{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:var(--s2)}
+.dlg__i{display:flex;align-items:center;gap:6px;font:400 11px/1.5 var(--font-mono);color:var(--ink-2)}
+.dlg__s{width:9px;height:9px;flex:none}
+.dlg__n{color:var(--ink);font-variant-numeric:tabular-nums}
+
+/* ── 底部流程带（五段闭环） ───────────── */
+.flowstrip{
+  border:1px solid var(--rule-2);background:var(--panel);
+  display:grid;grid-template-columns:190px 1fr;
+}
+.flowstrip__l{
+  padding:var(--s4);border-right:1px solid var(--rule);
+  display:flex;flex-direction:column;justify-content:center;
+}
+.flowstrip__k{font:400 10px/1 var(--font-mono);letter-spacing:.2em;color:var(--ink-3);text-transform:uppercase}
+.flowstrip__v{font:400 26px/1.15 var(--font-display);margin-top:10px;color:var(--ink)}
+.flowstrip__v em{font-style:normal;color:var(--signal)}
+.flowstrip__d{font-size:11.5px;line-height:1.55;color:var(--ink-2);margin-top:8px}
+
+.flowstrip__r{display:flex;align-items:stretch;padding:var(--s4) var(--s4)}
+.fseg{
+  flex:1;position:relative;padding:0 var(--s3);
+  display:flex;flex-direction:column;gap:6px;min-width:0;
+}
+.fseg::after{
+  content:"→";position:absolute;right:-8px;top:26px;
+  font:400 13px/1 var(--font-mono);color:var(--ink-4);
+}
+.fseg:last-child::after{display:none}
+.fseg__c{
+  width:34px;height:34px;border:1px solid var(--rule-3);
+  display:grid;place-items:center;
+  font:400 16px/1 var(--font-display);color:var(--ink);
+}
+.fseg--weak .fseg__c{background:var(--signal);border-color:var(--signal);color:#fff}
+.fseg__n{font:400 9.5px/1 var(--font-mono);letter-spacing:.16em;color:var(--ink-4)}
+.fseg__t{font-size:12px;font-weight:600;color:var(--ink)}
+.fseg--weak .fseg__t{color:var(--signal)}
+.fseg__d{font-size:11px;line-height:1.5;color:var(--ink-3);text-wrap:pretty}
+.fseg__bar{height:3px;background:var(--panel-2);margin-top:2px}
+.fseg__bar i{display:block;height:100%;background:var(--run)}
+.fseg--weak .fseg__bar i{background:var(--signal)}
+
+/* ── 密度与响应 ───────────────────────── */
+body.density-tight .dcard{padding:var(--s3)}
+body.density-tight .kstrip__v{font-size:34px}
+
+@media (max-width:1500px){
+  .dcard--3{grid-column:span 4}
+  .dcard--5{grid-column:span 6}
+  .dcard--7{grid-column:span 6}
+  .kstrip{grid-template-columns:repeat(3,1fr)}
+  .kstrip__i{border-bottom:1px solid var(--rule)}
+}
+@media (max-width:1080px){
+  .dcard--3,.dcard--4,.dcard--5,.dcard--6,.dcard--7,.dcard--8{grid-column:span 12}
+  .kstrip{grid-template-columns:repeat(2,1fr)}
+  .flowstrip{grid-template-columns:1fr}
+  .flowstrip__l{border-right:0;border-bottom:1px solid var(--rule)}
+  .flowstrip__r{flex-wrap:wrap;gap:var(--s4) 0}
+  .fseg{flex:0 0 50%}
+}

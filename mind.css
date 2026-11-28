@@ -1,0 +1,202 @@
+/* ═══════════════════════════════════════════════════════════
+   mind.css —— 认知与学习三视图的样式
+   思维模式 / 长期记忆 / 前提审查，视觉语言跟 os.css 一致：
+   紫=认知层，语义色仍按全站约定（绿在跑 黄未开 粉需决策 蓝对照）
+   ═══════════════════════════════════════════════════════════ */
+
+.mindlead{
+  border-left:3px solid var(--os-vi); padding:2px 0 2px 16px; margin:0 0 26px;
+}
+.mindlead p{ margin:0 0 8px; font:400 13.5px/1.75 var(--font-body); color:var(--ink-2); }
+.mindlead p:last-child{ margin-bottom:0 }
+.mindlead b{ color:var(--ink) }
+.mindlead em{ font-style:normal; color:var(--os-vi); font-weight:600 }
+.mindlead__w{ font-size:12px !important; color:var(--ink-3) !important; }
+
+/* ── 决策模式卡 ─────────────────────── */
+.pms{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+.pm{
+  background:var(--panel-2); border:1px solid var(--rule); border-radius:16px;
+  padding:16px 18px;
+}
+.pm__h{ display:flex; align-items:center; gap:9px; margin-bottom:9px; }
+.pm__id{
+  font:700 10px/1 var(--font-mono); color:#fff; background:var(--os-vi);
+  padding:4px 6px; border-radius:6px;
+}
+.pm__h h4{ flex:1 1 auto; margin:0; font:700 14.5px/1.35 var(--font-body); color:var(--ink); }
+.pm__s{ display:flex; gap:3px; }
+.pm__s i{ width:6px;height:6px;border-radius:50%;background:var(--rule-2); }
+.pm__s i.is-on{ background:var(--os-vi) }
+.pm__w{ margin:0 0 10px; font:400 12.5px/1.65 var(--font-body); color:var(--ink-2); }
+.pm__ev{ margin:0 0 12px; padding-left:16px; }
+.pm__ev li{ font:400 12px/1.7 var(--font-body); color:var(--ink-3); margin-bottom:3px; }
+.pm__ev li b{ color:var(--ink-2) }
+.pm__so{
+  display:flex; gap:9px; align-items:flex-start;
+  background:var(--os-vi-w); border-radius:11px; padding:10px 12px;
+}
+.pm__so i{
+  flex:0 0 auto; font-style:normal; font:700 10px/1.5 var(--font-body);
+  color:var(--os-vi); letter-spacing:.04em;
+}
+.pm__so span{ font:400 12px/1.6 var(--font-body); color:var(--ink-2); }
+
+/* ── 我的反模式 ─────────────────────── */
+.anti{ display:grid; gap:11px; }
+.anti__i{
+  display:flex; gap:13px; align-items:flex-start;
+  background:var(--signal-w); border:1px solid var(--signal-soft);
+  border-radius:14px; padding:14px 16px;
+}
+.anti__n{
+  flex:0 0 auto; width:24px;height:24px;border-radius:50%;
+  background:var(--signal); color:#fff; text-align:center;
+  font:700 12px/24px var(--font-mono);
+}
+.anti__i h5{ margin:0 0 5px; font:700 13.5px/1.3 var(--font-body); color:var(--ink); }
+.anti__i p{ margin:0; font:400 12.5px/1.7 var(--font-body); color:var(--ink-2); }
+.anti__r{ margin-top:6px !important; color:var(--signal) !important; font-weight:600 !important; }
+
+/* ── 记忆体六层 ─────────────────────── */
+.mt{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.mt__i{
+  background:var(--panel-2); border:1px solid var(--rule); border-radius:15px;
+  padding:15px 16px; border-top:3px solid var(--run);
+}
+.mt__i[data-st="part"]{ border-top-color:var(--open) }
+.mt__i[data-st="gap"]{ border-top-color:var(--signal); background:var(--signal-w) }
+.mt__k{ font:600 11.5px/1 var(--font-body); color:var(--ink-3); letter-spacing:.03em; }
+.mt__n{ font:800 26px/1.1 var(--font-body); color:var(--ink); margin:7px 0 8px; }
+.mt__n small{ font:500 11px/1 var(--font-body); color:var(--ink-3); margin-left:4px; }
+.mt__d{ font:400 12px/1.65 var(--font-body); color:var(--ink-2); }
+.mt__f{
+  margin-top:9px; padding-top:9px; border-top:1px dashed var(--rule);
+  font:400 11.5px/1.6 var(--font-body); color:var(--ink-3);
+}
+.mt__f b{ color:var(--ink-2) }
+.mchart{ width:100% }
+
+/* ── 写入规则 ───────────────────────── */
+.mr{ display:grid; gap:9px; }
+.mr__i{
+  display:flex; gap:12px; align-items:flex-start;
+  border:1px solid var(--rule); border-radius:13px; padding:12px 15px;
+  background:var(--panel-2);
+}
+.mr__i--in{ border-left:3px solid var(--run) }
+.mr__i--out{ border-left:3px solid var(--mute) }
+.mr__m{
+  flex:0 0 auto; font:700 10.5px/1 var(--font-body); padding:5px 8px; border-radius:999px;
+}
+.mr__i--in .mr__m{ background:var(--run-w); color:var(--run) }
+.mr__i--out .mr__m{ background:rgba(120,120,150,.12); color:var(--ink-3) }
+.mr__i b{ font:700 13px/1.4 var(--font-body); color:var(--ink); }
+.mr__i p{ margin:4px 0 0; font:400 12.2px/1.65 var(--font-body); color:var(--ink-2); }
+
+/* ── 记忆衰减 ───────────────────────── */
+.dcy{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+.dcy__i{
+  border:1px solid var(--rule); border-radius:15px; padding:15px 17px;
+  background:var(--panel-2);
+}
+.dcy__i[data-lv="高"]{ background:var(--signal-w); border-color:var(--signal-soft) }
+.dcy__h{ display:flex; align-items:center; gap:9px; margin-bottom:8px; }
+.dcy__lv{
+  font:700 10px/1 var(--font-body); padding:4px 7px; border-radius:999px;
+  background:var(--open-w); color:var(--open);
+}
+.dcy__i[data-lv="高"] .dcy__lv{ background:var(--signal); color:#fff }
+.dcy__h h5{ margin:0; font:700 13.5px/1.35 var(--font-body); color:var(--ink); }
+.dcy__i p{ margin:0; font:400 12.3px/1.7 var(--font-body); color:var(--ink-2); }
+.dcy__fix{
+  display:flex; gap:8px; margin-top:10px; padding-top:10px;
+  border-top:1px dashed var(--rule);
+}
+.dcy__fix i{ flex:0 0 auto; font-style:normal; font:700 10.5px/1.6 var(--font-body); color:var(--ink-3); }
+.dcy__fix span{ font:400 12px/1.6 var(--font-body); color:var(--ink-2); }
+
+/* ── 前提坍塌实录 ───────────────────── */
+.clp{ display:grid; gap:12px; }
+.clp__i{
+  display:flex; gap:15px; align-items:flex-start;
+  background:var(--panel-2); border:1px solid var(--rule);
+  border-left:3px solid var(--os-vi); border-radius:15px; padding:15px 17px;
+}
+.clp__n{ flex:0 0 auto; font:800 20px/1 var(--font-mono); color:var(--rule-2); }
+.clp__b{ flex:1 1 auto }
+.clp__c{ font:400 13px/1.5 var(--font-body); color:var(--ink-3); }
+.clp__c b{ color:var(--ink); text-decoration:line-through; text-decoration-color:var(--signal); }
+.clp__p{ margin-top:6px; font:400 12.2px/1.6 var(--font-body); color:var(--ink-3); }
+.clp__k{ margin-top:8px; font:400 12.4px/1.65 var(--font-body); color:var(--ink-2); }
+.clp__k i{
+  font-style:normal; font:700 10px/1 var(--font-body); color:var(--os-vi);
+  background:var(--os-vi-w); border-radius:5px; padding:3px 6px; margin-right:7px;
+}
+.clp__r{
+  margin-top:9px; padding:9px 12px; border-radius:10px;
+  background:var(--run-w); color:var(--ink-2);
+  font:600 12.3px/1.6 var(--font-body);
+}
+.clp__d{ flex:0 0 auto; font:500 10.5px/1 var(--font-mono); color:var(--ink-4); }
+
+/* ── 三类前提 ───────────────────────── */
+.pr3{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.pr3__i{
+  border:1px solid var(--rule); border-radius:15px; padding:15px 17px;
+  background:var(--panel-2); border-top:3px solid var(--signal);
+}
+.pr3__i[data-c="open"]{ border-top-color:var(--open) }
+.pr3__i[data-c="run"]{ border-top-color:var(--run) }
+.pr3__k{ font:700 13.5px/1 var(--font-body); color:var(--ink); }
+.pr3__q{ margin-top:9px; font:400 12.4px/1.7 var(--font-body); color:var(--ink-2); }
+.pr3__ex{
+  margin-top:11px; padding-top:10px; border-top:1px dashed var(--rule);
+  font:400 11.8px/1.65 var(--font-body); color:var(--ink-3);
+}
+.pr3__ex i{ display:block; font-style:normal; font-weight:700; color:var(--ink-4); margin-bottom:3px; }
+
+/* ── 五问链 + 审查器 ────────────────── */
+.fq{ display:grid; gap:8px; }
+.fq__i{
+  display:flex; gap:12px; align-items:flex-start;
+  background:var(--panel-2); border:1px solid var(--rule);
+  border-radius:13px; padding:12px 15px;
+}
+.fq__n{
+  flex:0 0 auto; width:22px;height:22px;border-radius:50%;
+  background:var(--os-vi); color:#fff; text-align:center;
+  font:700 11px/22px var(--font-mono);
+}
+.fq__i b{ font:700 13px/1.4 var(--font-body); color:var(--ink); }
+.fq__i p{ margin:3px 0 0; font:400 12.2px/1.65 var(--font-body); color:var(--ink-2); }
+
+.fq__run{
+  margin-top:18px; padding:16px 18px; border-radius:16px;
+  background:var(--os-vi-w); border:1px solid rgba(124,92,255,.22);
+  display:grid; grid-template-columns:1fr auto; gap:10px; align-items:center;
+}
+.fq__rk{
+  grid-column:1 / -1; font:700 12px/1 var(--font-body); color:var(--os-vi);
+}
+.fq__run input{
+  border:1px solid var(--rule); border-radius:11px; padding:11px 14px;
+  font:400 13px/1.4 var(--font-body); color:var(--ink);
+  background:var(--panel); outline:none;
+}
+.fq__run input:focus{ border-color:var(--os-vi) }
+
+.fq__out{
+  margin-top:14px; padding:16px 18px; border-radius:16px;
+  background:var(--panel); border:1px solid var(--rule);
+}
+.pmo__h{ font:600 13px/1.6 var(--font-body); color:var(--ink); margin-bottom:10px; }
+.pmo__l{ margin:0; padding-left:18px; }
+.pmo__l li{ font:400 12.5px/1.75 var(--font-body); color:var(--ink-2); margin-bottom:7px; }
+.pmo__l li b{ color:var(--ink) }
+.pmo__l li span{ color:var(--ink-3); font-size:11.8px }
+.pmo__f{ display:flex; gap:9px; margin-top:12px; }
+
+@media (max-width:1180px){
+  .pms,.mt,.dcy,.pr3{ grid-template-columns:1fr }
+}
